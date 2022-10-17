@@ -66,7 +66,10 @@ export default function Login() {
             </View>
             {/* register btn */}
             <View className="mt-10">
-              <OutlinedButton text="Register" submitHandler={() => {}}>
+              <OutlinedButton
+                right={true}
+                text="Register"
+                submitHandler={() => {}}>
                 <ArrowLongRightIcon color={'#1C6758'} size={30} />
               </OutlinedButton>
             </View>
