@@ -9,10 +9,14 @@ import {
   UserIcon,
 } from 'react-native-heroicons/solid';
 import OutlinedButton from '../../Components/Button/OutlinedButton';
+import {useNavigation} from '@react-navigation/native';
 
 export default function RegisterAs() {
+
+  const navigation = useNavigation();
+
   const clickHandler = screen => {
-    // console.debug(screen);
+    navigation.navigate(screen);
   };
 
   return (
@@ -47,7 +51,7 @@ const ContainedButton = ({text, children, submitHandler}) => {
     <View className="my-[15px]">
       <TouchableOpacity
         activeOpacity={0.5}
-        onPress={() => submitHandler(text.split(' ')[0])}
+        onPress={() => submitHandler(text.split(' ')[0] + "Signup")}
         className="bg-[#1C6758] rounded-md p-2 flex-row items-center justify-between">
         <View>{children}</View>
         <Text
