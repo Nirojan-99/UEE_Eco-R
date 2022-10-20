@@ -22,7 +22,10 @@ const App = () => {
         <NavigationContainer>
           <Stack.Navigator
             initialRouteName="Customer"
-            screenOptions={{headerShown: false}}>
+            screenOptions={{
+              headerShown: false,
+              animation: 'slide_from_bottom',
+            }}>
             <Stack.Screen name="Home" component={Login} />
             <Stack.Screen name="RegisterAs" component={RegisterAs} />
             <Stack.Screen name="OTP" component={OTP} />

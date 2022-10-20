@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useLayoutEffect, useState} from 'react';
 
 //navigation
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -6,14 +6,32 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import RegisterAs from '../Register/RegisterAs';
 import CustomBottomTabBar from '../../Components/CustomBottomTabBar/CustomBottomTabBar';
 import Explore from './Explore/Explore';
+import {Keyboard} from 'react-native';
+import RenderIf from '../../Components/RenderIf/RenderIf';
 
 export default function CustomerTab() {
   const Tab = createBottomTabNavigator();
 
+  const [isVisible, setVisible] = useState(true);
+
+  // useEffect(() => {
+  //   const show = Keyboard.addListener('keyboardDidShow', setVisible(false));
+  //   // const hide = Keyboard.addListener('keyboardDidHide', () => {
+  //   //   setVisible(true);
+  //   // });
+
+  //   return () => {
+  //     show.remove();
+  //     // hide.remove();
+  //   };
+  // }, []);
+
   return (
     <Tab.Navigator
       initialRouteName="Explore"
-      tabBar={props => <CustomBottomTabBar {...props} />}
+      tabBar={props => {
+        return isVisible ? <CustomBottomTabBar {...props} /> : null;
+      }}
       screenOptions={{
         headerShown: false,
         style: {

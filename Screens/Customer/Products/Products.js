@@ -3,6 +3,7 @@ import React from 'react';
 import Title from '../../../Components/Title/Title';
 import {MagnifyingGlassCircleIcon} from 'react-native-heroicons/solid';
 import Product from './Product';
+import {useNavigation} from '@react-navigation/native';
 
 export default function Products() {
   // open search modal
@@ -11,9 +12,17 @@ export default function Products() {
   //dummy data
   const data = [1, 2, 3, 4, 5, 6, 7];
 
+  //hook
+  const navigation = useNavigation();
+
+  //request navigation
+  const onRequest = ({product}) => {
+    navigation.navigate('Request');
+  };
+
   //render
   const renderProducts = ({item}) => {
-    return <Product data={item} />;
+    return <Product data={item} onRequest={onRequest} />;
   };
 
   return (
@@ -29,7 +38,7 @@ export default function Products() {
       <FlatList
         data={data}
         renderItem={renderProducts}
-        keyExtractor={({item, index}) => index?.toString()}
+        keyExtractor={(item, index) => index?.toString()}
         showsVerticalScrollIndicator={false}
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={{paddingHorizontal: 12, paddingBottom: 60}}

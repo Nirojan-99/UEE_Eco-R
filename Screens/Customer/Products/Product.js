@@ -13,7 +13,7 @@ import {
   ArrowRightIcon,
 } from 'react-native-heroicons/solid';
 
-export default function Product() {
+export default function Product({onRequest}) {
   return (
     <View className="my-3">
       <ShadowGradientBG>
@@ -69,7 +69,9 @@ export default function Product() {
           <View
             className="bg-[#1C6758] py-3 px-4 flex-row items-center justify-end"
             style={{borderBottomRightRadius: 10, borderBottomLeftRadius: 10}}>
-            <TouchableOpacity className="flex-row items-center space-x-2">
+            <TouchableOpacity
+              className="flex-row items-center space-x-2"
+              onPress={onRequest}>
               <Text className="text-white font-semibold text-[15px]">
                 Request Pickup
               </Text>
