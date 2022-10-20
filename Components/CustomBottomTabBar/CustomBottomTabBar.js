@@ -6,7 +6,7 @@ import {Image} from 'react-native';
 
 export default function CustomBottomTabBar({state, navigation, tabs}) {
   return (
-    <View className="h-20  py-1 shadow px-5 flex-row  items-center m-0 justify-between">
+    <View className="h-20  py-1 shadow px-5 flex-row  items-center m-0 justify-between" style={{shadowColor:"#333"}}>
       {state.routes.map((route, index) => {
         const label = route?.name;
 
