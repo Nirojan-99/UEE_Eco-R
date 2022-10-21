@@ -3,11 +3,18 @@ import React from 'react';
 import Title from '../../../Components/Title/Title';
 import tick from '../../../Assets/tick.png';
 import anime from '../../../Assets/confirm.png';
+import {TouchableOpacity} from 'react-native';
+import {ArrowLeftCircleIcon} from 'react-native-heroicons/solid';
+import {useNavigation} from '@react-navigation/native';
 
 export default function ConfirmPickup() {
-
   const width = Dimensions.get('screen').width;
-  
+
+  const navigation = useNavigation();
+
+  const goBack = () => {
+    navigation.goBack();
+  };
   return (
     <SafeAreaView className="my-3">
       <View className="mx-3">
@@ -35,8 +42,16 @@ export default function ConfirmPickup() {
           </Text>
         </View>
       </View>
-      <View className=" flex-1 w-full mt-20">
+      <View className="mt-4">
         <Image className="h-80" style={{width: width}} source={anime} />
+      </View>
+      <View className="mt-4 mx-3 flex-row justify-end">
+        <TouchableOpacity
+          className="flex-row items-center space-x-2"
+          onPress={goBack}>
+          <ArrowLeftCircleIcon color={'#333'} />
+          <Text className="text-black font-semibold text-lg">Go Back</Text>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );

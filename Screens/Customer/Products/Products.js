@@ -7,7 +7,9 @@ import {useNavigation} from '@react-navigation/native';
 
 export default function Products() {
   // open search modal
-  const openSearchModal = () => {};
+  const openSearchModal = () => {
+    navigation.navigate("Search")
+  };
 
   //dummy data
   const data = [1, 2, 3, 4, 5, 6, 7];
