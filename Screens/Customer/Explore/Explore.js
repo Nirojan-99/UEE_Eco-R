@@ -4,13 +4,14 @@ import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Products from '../Products/Products';
 import RequestPickup from '../RequestPickup/RequestPickup';
+import ConfirmPickup from '../ConfirmPickup/ConfirmPickup';
 
 export default function Explore() {
   const Stack = createNativeStackNavigator();
 
   return (
     <Stack.Navigator
-      initialRouteName="Products"
+      initialRouteName="Confirm"
       screenOptions={{
         headerRight: () => <></>,
         headerLeft: () => <></>,
@@ -22,6 +23,7 @@ export default function Explore() {
       }}>
       <Stack.Screen name="Products" component={Products} />
       <Stack.Screen name="Request" component={RequestPickup} />
+      <Stack.Screen name="Confirm" component={ConfirmPickup} />
     </Stack.Navigator>
   );
 }

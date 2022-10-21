@@ -17,11 +17,20 @@ import DatePicker from 'react-native-date-picker';
 import {TextInput} from 'react-native';
 
 import {CalendarDaysIcon, ClockIcon} from 'react-native-heroicons/solid';
+import {useNavigation} from '@react-navigation/native';
 
 export default function RequestPickup() {
   const [date, setDate] = useState(new Date());
   const [open, setOpen] = useState(false);
   const [mode, setMode] = useState('date');
+
+  //hook
+  const navigation = useNavigation();
+
+  //submit handler
+  const submitHandler = () => {
+    navigation.navigate('Confirm');
+  };
 
   return (
     <KeyboardAvoidingView behavior="height">
@@ -148,7 +157,10 @@ export default function RequestPickup() {
               </View>
               {/* btn */}
               <View className="mt-4">
-                <ContainedButton text={'SUBMIT'} />
+                <ContainedButton
+                  submitHandler={submitHandler}
+                  text={'SUBMIT'}
+                />
               </View>
             </View>
           </View>
