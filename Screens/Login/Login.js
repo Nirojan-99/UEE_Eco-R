@@ -11,6 +11,7 @@ import ContainedButton from '../../Components/Button/ContainedButton';
 import OutlinedButton from '../../Components/Button/OutlinedButton';
 import {KeyboardAvoidingView} from 'react-native';
 import {ScrollView} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 
 export default function Login() {
   const [checkBoxSelected, setCheckboxSelected] = useState(false);
@@ -20,6 +21,9 @@ export default function Login() {
   };
 
   const submitHandler = () => {};
+
+  const navigation = useNavigation();
+
   return (
     <ScrollView>
       <KeyboardAvoidingView behavior="position">
@@ -69,7 +73,9 @@ export default function Login() {
               <OutlinedButton
                 right={true}
                 text="Register"
-                submitHandler={() => {}}>
+                submitHandler={() => {
+                  navigation.navigate('RegisterAs');
+                }}>
                 <ArrowLongRightIcon color={'#1C6758'} size={30} />
               </OutlinedButton>
             </View>
