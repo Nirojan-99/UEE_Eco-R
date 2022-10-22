@@ -37,6 +37,9 @@ const CustomTabBar = ({state, descriptors, navigation}) => {
 
         return (
           <TouchableOpacity
+            className={`${index === 0 && 'ml-3 '} ${
+              index === 0 && !isFocused && 'pl-0'
+            }`}
             accessibilityRole="button"
             accessibilityState={isFocused ? {selected: true} : {}}
             accessibilityLabel={options.tabBarAccessibilityLabel}
@@ -66,10 +69,10 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   tab: {
-    height: 28,
     justifyContent: 'center',
     borderRadius: 5,
     paddingHorizontal: 10,
+    paddingVertical: 4,
   },
 });
 

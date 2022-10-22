@@ -10,12 +10,13 @@ export default function AccountTabs() {
   const Tab = createMaterialTopTabNavigator();
   return (
     <Tab.Navigator
+      initialRouteName="Profile"
       tabBar={props => (
         <View>
           <CustomTabBar {...props} />
         </View>
       )}>
-      <Tab.Screen name="Account" component={Profile} />
+      <Tab.Screen name="Profile" component={Profile} />
       <Tab.Screen name="Security" component={Security} />
       <Tab.Screen name="Payment" component={Payment} />
     </Tab.Navigator>
