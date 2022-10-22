@@ -9,12 +9,10 @@ import RegisterAs from './Screens/Register/RegisterAs';
 //navigation
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NavigationContainer} from '@react-navigation/native';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import CustomerTab from './Screens/Customer/CustomerTab';
 
 const App = () => {
   const Stack = createNativeStackNavigator();
-  const Tab = createBottomTabNavigator();
 
   return (
     <SafeAreaView className=" flex-1">
