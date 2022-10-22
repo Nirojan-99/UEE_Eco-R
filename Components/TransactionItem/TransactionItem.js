@@ -9,7 +9,7 @@ export default function TransactionItem({item}) {
         <Text className="text-[#1C6758] font-semibold text-[14px]">
           Company Name
         </Text>
-        <Text className="text-gray-500 text-[11px]">TransactionItem</Text>
+        <Text className="text-gray-500 text-[11px]">2022-12-23</Text>
       </View>
       <Text className="text-gray-500 text-[11px]">Rs {item}.00</Text>
     </View>
