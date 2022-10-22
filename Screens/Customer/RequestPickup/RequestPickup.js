@@ -29,7 +29,11 @@ export default function RequestPickup() {
 
   //submit handler
   const submitHandler = () => {
-    navigation.navigate('Confirm');
+    // navigation.navigate('Confirm');
+    navigation.reset({
+      index: 1,
+      routes: [{name: 'Products'}, {name: 'Confirm'}],
+    });
   };
 
   return (

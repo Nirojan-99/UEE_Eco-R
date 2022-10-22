@@ -6,29 +6,17 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import RegisterAs from '../Register/RegisterAs';
 import CustomBottomTabBar from '../../Components/CustomBottomTabBar/CustomBottomTabBar';
 import Explore from './Explore/Explore';
-import {Keyboard} from 'react-native';
-import RenderIf from '../../Components/RenderIf/RenderIf';
+import Schedule from './Schedule/Schedule';
+import Account from './Account/Account';
 
 export default function CustomerTab() {
   const Tab = createBottomTabNavigator();
 
   const [isVisible, setVisible] = useState(true);
 
-  // useEffect(() => {
-  //   const show = Keyboard.addListener('keyboardDidShow', setVisible(false));
-  //   // const hide = Keyboard.addListener('keyboardDidHide', () => {
-  //   //   setVisible(true);
-  //   // });
-
-  //   return () => {
-  //     show.remove();
-  //     // hide.remove();
-  //   };
-  // }, []);
-
   return (
     <Tab.Navigator
-      initialRouteName="Explore"
+      initialRouteName="Account"
       tabBar={props => {
         return isVisible ? <CustomBottomTabBar {...props} /> : null;
       }}
@@ -45,8 +33,8 @@ export default function CustomerTab() {
         showLabel: false,
       }}>
       <Tab.Screen name="Explore" component={Explore} />
-      <Tab.Screen name="Schedule" component={RegisterAs} />
-      <Tab.Screen name="Account" component={RegisterAs} />
+      <Tab.Screen name="Schedule" component={Schedule} />
+      <Tab.Screen name="Account" component={Account} />
     </Tab.Navigator>
   );
 }
