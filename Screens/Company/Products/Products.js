@@ -23,10 +23,18 @@ export default function Products() {
     navigation.navigate('Search');
   };
 
+  const addProduct = () => {
+    navigation.navigate('ManageProducts');
+  };
+
+  const editProduct = product => {
+    navigation.navigate('ManageProducts', {product});
+  };
+
   const data = [1, 2, 3, 4, 5, 6, 7];
 
   const renderItem = ({item}) => {
-    return <CompanyProduct />;
+    return <CompanyProduct onEdit={editProduct} />;
   };
 
   const hight = Dimensions.get('screen').height;
@@ -44,9 +52,7 @@ export default function Products() {
             </View>
           </View>
           {/* products sec */}
-          <View
-            className="relative w-full mt-7"
-            style={{height: hight * 0.52}}>
+          <View className="relative w-full mt-7" style={{height: hight * 0.52}}>
             <View className="bg-[#1C6758] w-1/2  rounded-br-[60px]  rounded-tr-md absolute top-0 left-0 bottom-0"></View>
             <View>
               <FlatList
@@ -62,10 +68,11 @@ export default function Products() {
                 }}
                 showsHorizontalScrollIndicator={false}
                 showsVerticalScrollIndicator={false}
+                keyExtractor={(item, index) => index.toString()}
               />
             </View>
             <View className="absolute bottom-0 left-0">
-              <TouchableOpacity className="mb-4 ml-5">
+              <TouchableOpacity onPress={addProduct} className="mb-4 ml-5">
                 <Text className="text-white font-semibold text-xl">
                   + Add New
                 </Text>

@@ -7,7 +7,7 @@ import checked from '../../Assets/checked.png';
 import requirement from '../../Assets/requirement.png';
 import {PencilIcon, TrashIcon} from 'react-native-heroicons/solid';
 
-export default function CompanyProduct() {
+export default function CompanyProduct({onEdit}) {
   const width = Dimensions.get('screen').width;
   const hight = Dimensions.get('screen').height;
 
@@ -62,7 +62,9 @@ export default function CompanyProduct() {
               <TrashIcon color={'#fff'} size={20} />
             </View>
           </TouchableOpacity>
-          <TouchableOpacity activeOpacity={0.5}>
+          <TouchableOpacity
+            activeOpacity={0.5}
+            onPress={() => onEdit('product data')}>
             <View className=" bg-[#fff] p-2 rounded-full flex-row items-center justify-between">
               <PencilIcon color={'#333'} size={20} />
             </View>
