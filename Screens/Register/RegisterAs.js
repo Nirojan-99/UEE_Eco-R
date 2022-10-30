@@ -37,7 +37,7 @@ export default function RegisterAs() {
       {/* back btn */}
       <View className="mt-16">
         <OutlinedButton
-          submitHandler={() => clickHandler('Login')}
+          submitHandler={() => clickHandler('Home')}
           text="Login">
           <ArrowLongLeftIcon color={'#1C6758'} />
         </OutlinedButton>

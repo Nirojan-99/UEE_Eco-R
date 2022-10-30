@@ -2,6 +2,7 @@ import React from 'react';
 import {SafeAreaView} from 'react-native';
 import Gradient from './Components/GaradientBG/Gradient';
 import CustomerSignup from './Screens/Customer/Signup/Signup';
+import CompanySignup from './Screens/Company/Siginup/Signup';
 import Login from './Screens/Login/Login';
 import OTP from './Screens/OtpValidation/OTP';
 import RegisterAs from './Screens/Register/RegisterAs';
@@ -15,11 +16,11 @@ const App = () => {
   const Stack = createNativeStackNavigator();
 
   return (
-    <SafeAreaView className=" flex-1">
+    <SafeAreaView className="flex-1">
       <Gradient>
         <NavigationContainer>
           <Stack.Navigator
-            initialRouteName="Customer"
+            initialRouteName="CompanySignup"
             screenOptions={{
               headerShown: false,
               animation: 'slide_from_bottom',
@@ -28,6 +29,7 @@ const App = () => {
             <Stack.Screen name="RegisterAs" component={RegisterAs} />
             <Stack.Screen name="OTP" component={OTP} />
             <Stack.Screen name="CustomerSignup" component={CustomerSignup} />
+            <Stack.Screen name="CompanySignup" component={CompanySignup} />
             <Stack.Screen name="Customer" component={CustomerTab} />
           </Stack.Navigator>
         </NavigationContainer>
