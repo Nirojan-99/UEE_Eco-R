@@ -4,18 +4,16 @@ import React, {useState} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import CustomBottomTabBar from '../../Components/CustomBottomTabBar/CustomBottomTabBar';
-import Explore from './Explore/Explore';
-import Schedule from './Schedule/Schedule';
-import Account from './Account/Account';
+import RegisterAs from '../Register/RegisterAs';
+import ProductScreen from './ProductsScreen/ProductScreen';
 
-export default function CustomerTab() {
+export default function CompanyTab() {
   const Tab = createBottomTabNavigator();
 
   const [isVisible, setVisible] = useState(true);
-
   return (
     <Tab.Navigator
-      initialRouteName="Account"
+      initialRouteName="Product"
       tabBar={props => {
         return isVisible ? <CustomBottomTabBar {...props} /> : null;
       }}
@@ -31,9 +29,10 @@ export default function CustomerTab() {
         },
         showLabel: false,
       }}>
-      <Tab.Screen name="Explore" component={Explore} />
-      <Tab.Screen name="Schedule" component={Schedule} />
-      <Tab.Screen name="Account" component={Account} />
+      <Tab.Screen name="Product" component={ProductScreen} />
+      <Tab.Screen name="Schedule" component={RegisterAs} />
+      <Tab.Screen name="Vehicle" component={RegisterAs} />
+      <Tab.Screen name="Account" component={RegisterAs} />
     </Tab.Navigator>
   );
 }

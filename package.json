@@ -21,6 +21,7 @@
     "react-native": "0.70.3",
     "react-native-date-picker": "^4.2.5",
     "react-native-drop-shadow": "^0.0.5",
+    "react-native-dropdown-picker": "^5.4.2",
     "react-native-heroicons": "^3.2.0",
     "react-native-linear-gradient": "^2.6.2",
     "react-native-pager-view": "^6.0.1",

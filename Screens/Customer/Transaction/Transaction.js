@@ -4,11 +4,9 @@ import DropShadow from 'react-native-drop-shadow';
 import LinearGradient from 'react-native-linear-gradient';
 import visa from '../../../Assets/visa.png';
 import {Image} from 'react-native';
-import ContainedButton from '../../../Components/Button/ContainedButton';
 import {Dimensions} from 'react-native';
 import {FlatList} from 'react-native';
 import TransactionItem from '../../../Components/TransactionItem/TransactionItem';
-import {ScrollView} from 'react-native';
 import {TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 
