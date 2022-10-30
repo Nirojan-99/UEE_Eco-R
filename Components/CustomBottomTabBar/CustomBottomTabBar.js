@@ -6,7 +6,11 @@ import {Image} from 'react-native';
 
 export default function CustomBottomTabBar({state, navigation, tabs}) {
   return (
-    <View className="h-20  py-1 shadow px-5 flex-row  items-center m-0 justify-between" style={{shadowColor:"#333"}}>
+    <View
+      className={`h-20  py-1 shadow  ${
+        state.routes.length === 3 ? 'px-6' : 'px-3'
+      } flex-row  items-center m-0 justify-between `}
+      style={{shadowColor: '#333'}}>
       {state.routes.map((route, index) => {
         const label = route?.name;
 
@@ -33,10 +37,14 @@ export default function CustomBottomTabBar({state, navigation, tabs}) {
 
         return (
           <TouchableOpacity
+            key={index}
             activeOpacity={0.7}
             onPress={onPress}
             onLongPress={onLongPress}>
-            <TabIcon focused={isFocused} label={label}>
+            <TabIcon
+              length={state.routes.length}
+              focused={isFocused}
+              label={label}>
               {IconRender(route.name, isFocused)}
             </TabIcon>
           </TouchableOpacity>
@@ -94,6 +102,38 @@ const IconRender = (route, isFocused) => {
             <Image
               className="w-8 h-8"
               source={require('../../Assets/user.png')}
+            />
+          )}
+        </>
+      );
+    case 'Product':
+      return (
+        <>
+          {isFocused ? (
+            <Image
+              className="w-8 h-8"
+              source={require('../../Assets/product-w.png')}
+            />
+          ) : (
+            <Image
+              className="w-8 h-8"
+              source={require('../../Assets/product.png')}
+            />
+          )}
+        </>
+      );
+    case 'Vehicle':
+      return (
+        <>
+          {isFocused ? (
+            <Image
+              className="w-8 h-8"
+              source={require('../../Assets/truck.png')}
+            />
+          ) : (
+            <Image
+              className="w-8 h-8"
+              source={require('../../Assets/truck-g.png')}
             />
           )}
         </>
