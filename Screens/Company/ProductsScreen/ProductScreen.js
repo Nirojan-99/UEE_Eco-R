@@ -1,8 +1,8 @@
-import { View, Text } from 'react-native'
 import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Products from '../Products/Products';
 import ManageProduct from '../ManageProduct/ManageProduct';
+import TakeImage from '../TakeImage/TakeImage';
 
 export default function ProductScreen() {
     const Stack = createNativeStackNavigator();
@@ -18,7 +18,7 @@ export default function ProductScreen() {
     }}>
     <Stack.Screen name="Products" component={Products} />
     <Stack.Screen name="ManageProducts" component={ManageProduct} />
-    <Stack.Screen name="ImageTake" component={ManageProduct} />
+    <Stack.Screen name="ImageTake" component={TakeImage} />
     {/* <Stack.Screen name="Request" component={RequestPickup} />
     <Stack.Screen name="Confirm" component={ConfirmPickup} />
     <Stack.Screen
