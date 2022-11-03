@@ -6,6 +6,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import CustomBottomTabBar from '../../Components/CustomBottomTabBar/CustomBottomTabBar';
 import RegisterAs from '../Register/RegisterAs';
 import ProductScreen from './ProductsScreen/ProductScreen';
+import ScheduleScreen from './ScheduleScreen/ScheduleScreen';
 
 export default function CompanyTab() {
   const Tab = createBottomTabNavigator();
@@ -13,7 +14,7 @@ export default function CompanyTab() {
   const [isVisible, setVisible] = useState(true);
   return (
     <Tab.Navigator
-      initialRouteName="Product"
+      initialRouteName="Schedule"
       tabBar={props => {
         return isVisible ? <CustomBottomTabBar {...props} /> : null;
       }}
@@ -30,7 +31,7 @@ export default function CompanyTab() {
         showLabel: false,
       }}>
       <Tab.Screen name="Product" component={ProductScreen} />
-      <Tab.Screen name="Schedule" component={RegisterAs} />
+      <Tab.Screen name="Schedule" component={ScheduleScreen} />
       <Tab.Screen name="Vehicle" component={RegisterAs} />
       <Tab.Screen name="Account" component={RegisterAs} />
     </Tab.Navigator>
