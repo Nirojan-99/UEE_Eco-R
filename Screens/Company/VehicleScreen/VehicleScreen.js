@@ -23,7 +23,11 @@ export default function VehicleScreen() {
         options={{animation: 'fade'}}
         component={FinishPickup}
       />
-      <Stack.Screen name="ManageVehicle" component={ManageVehicle} />
+      <Stack.Screen
+        name="ManageVehicle"
+        options={{animation: 'fade_from_bottom'}}
+        component={ManageVehicle}
+      />
       <Stack.Screen name="ManageDriver" component={ManageDriver} />
     </Stack.Navigator>
   );

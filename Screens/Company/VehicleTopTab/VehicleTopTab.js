@@ -14,7 +14,7 @@ export default function VehicleTopTab() {
         <Title text={'Vehicle'} />
       </View>
       <Tab.Navigator
-        initialRouteName="Pickup"
+        initialRouteName="Vehicle"
         tabBar={props => (
           <View>
             <CustomTabBar {...props} />
