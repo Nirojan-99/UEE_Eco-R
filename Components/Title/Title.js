@@ -4,7 +4,7 @@ import React from 'react';
 export default function Title({text}) {
   return (
     <View className="my-3">
-      <Text className="text-black text-3xl font-bold">{text}</Text>
+      <Text className="text-black text-2xl font-bold">{text}</Text>
     </View>
   );
 }
