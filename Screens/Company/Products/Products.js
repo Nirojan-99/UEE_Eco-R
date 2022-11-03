@@ -30,6 +30,9 @@ export default function Products() {
   const editProduct = product => {
     navigation.navigate('ManageProducts', {product});
   };
+  const handleInsightClick = () => {
+    navigation.navigate('Insights');
+  };
 
   const data = [1, 2, 3, 4, 5, 6, 7];
 
@@ -81,7 +84,9 @@ export default function Products() {
           </View>
           {/* view insights sec */}
           <View className="bg-white mt-5 py-6 ">
-            <TouchableOpacity className="flex-row items-center justify-center ">
+            <TouchableOpacity
+              onPress={handleInsightClick}
+              className="flex-row items-center justify-center ">
               <Text className="text-[#1C6758] mr-12 font-bold text-lg">
                 View Insight
               </Text>
