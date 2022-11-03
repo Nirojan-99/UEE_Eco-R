@@ -5,17 +5,31 @@ import Title from '../../../Components/Title/Title';
 import {FlatList} from 'react-native';
 import CollectionFromDealer from '../../../Components/CollectionFromDealer/CollectionFromDealer';
 import CollectionFromCustomer from '../../../Components/CollectionFromCustomer/CollectionFromCustomer';
+import FinishCollection from '../FinishCollection/FinishCollection';
+import {useState} from 'react';
 
 export default function Schedule() {
   const data = [1, 2, 3, 4, 5, 6];
 
+  const [open, setOpen] = useState(false);
+
   const renderItem = ({item}) => {
     return (
       <View className="mr-4">
-        <CollectionFromDealer />
+        <CollectionFromDealer onFinish={onFinish} />
       </View>
     );
   };
+
+  const onFinish = id => {
+    setOpen(true);
+  };
+
+  const handleYes = id => {
+    setOpen(false);
+    // TODO
+  };
+
   const renderCustomerItem = ({item}) => {
     return (
       <View className="mr-4">
@@ -25,6 +39,11 @@ export default function Schedule() {
   };
   return (
     <SafeAreaView className="flex-1">
+      <FinishCollection
+        handleYes={handleYes}
+        open={open}
+        onClose={() => setOpen(false)}
+      />
       {/* head */}
       <View className="mx-3">
         <Title text="Schedule" />
