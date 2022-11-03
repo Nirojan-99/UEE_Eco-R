@@ -18,7 +18,11 @@ export default function VehicleScreen() {
         animationDuration: 0.005,
       }}>
       <Stack.Screen name="Vehicles" component={VehicleTopTab} />
-      <Stack.Screen name="FinishPickup" component={FinishPickup} />
+      <Stack.Screen
+        name="FinishPickup"
+        options={{animation: 'fade'}}
+        component={FinishPickup}
+      />
       <Stack.Screen name="ManageVehicle" component={ManageVehicle} />
       <Stack.Screen name="ManageDriver" component={ManageDriver} />
     </Stack.Navigator>
