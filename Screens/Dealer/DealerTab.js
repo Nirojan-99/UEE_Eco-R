@@ -1,14 +1,15 @@
-import {View, Text} from 'react-native';
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import CustomBottomTabBar from '../../Components/CustomBottomTabBar/CustomBottomTabBar';
 import Requests from './Requests/Requests';
 import {useState} from 'react';
+import RequestScreen from './RequestScreen/RequestScreen';
 
 export default function DealerTab() {
   const Tab = createBottomTabNavigator();
 
   const [isVisible, setVisible] = useState(true);
+
   return (
     <Tab.Navigator
       initialRouteName="Requests"
@@ -27,7 +28,7 @@ export default function DealerTab() {
         },
         showLabel: false,
       }}>
-      <Tab.Screen name="Requests" component={Requests} />
+      <Tab.Screen name="Requests" component={RequestScreen} />
       <Tab.Screen name="Schedule" component={Requests} />
       <Tab.Screen name="Notification" component={Requests} />
       <Tab.Screen name="Account" component={Requests} />
