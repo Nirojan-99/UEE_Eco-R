@@ -9,7 +9,7 @@ export default function VehicleScreen() {
   const Stack = createNativeStackNavigator();
   return (
     <Stack.Navigator
-      initialRouteName="Products"
+      initialRouteName="Vehicles"
       screenOptions={{
         headerRight: () => <></>,
         headerLeft: () => <></>,
@@ -23,8 +23,16 @@ export default function VehicleScreen() {
         options={{animation: 'fade'}}
         component={FinishPickup}
       />
-      <Stack.Screen name="ManageVehicle" component={ManageVehicle} />
-      <Stack.Screen name="ManageDriver" component={ManageDriver} />
+      <Stack.Screen
+        name="ManageVehicle"
+        options={{animation: 'fade_from_bottom'}}
+        component={ManageVehicle}
+      />
+      <Stack.Screen
+        name="ManageDriver"
+        options={{animation: 'fade_from_bottom'}}
+        component={ManageDriver}
+      />
     </Stack.Navigator>
   );
 }
