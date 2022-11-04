@@ -11,7 +11,7 @@ export default function AccountTabs() {
   const Tab = createMaterialTopTabNavigator();
   return (
     <Tab.Navigator
-      initialRouteName="Profile"
+      initialRouteName="Payment"
       tabBar={props => (
         <View>
           <CustomTabBar {...props} />
