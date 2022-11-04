@@ -138,6 +138,38 @@ const IconRender = (route, isFocused) => {
           )}
         </>
       );
+    case 'Requests':
+      return (
+        <>
+          {isFocused ? (
+            <Image
+              className="w-8 h-8"
+              source={require('../../Assets/category-w.png')}
+            />
+          ) : (
+            <Image
+              className="w-8 h-8"
+              source={require('../../Assets/category.png')}
+            />
+          )}
+        </>
+      );
+    case 'Notification':
+      return (
+        <>
+          {isFocused ? (
+            <Image
+              className="w-8 h-8"
+              source={require('../../Assets/alarm-w.png')}
+            />
+          ) : (
+            <Image
+              className="w-8 h-8"
+              source={require('../../Assets/alarm.png')}
+            />
+          )}
+        </>
+      );
 
     default:
       break;
