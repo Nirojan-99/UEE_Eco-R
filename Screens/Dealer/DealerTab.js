@@ -4,6 +4,7 @@ import CustomBottomTabBar from '../../Components/CustomBottomTabBar/CustomBottom
 import Requests from './Requests/Requests';
 import {useState} from 'react';
 import RequestScreen from './RequestScreen/RequestScreen';
+import ScheduleScreen from './ScheduleScreen/ScheduleScreen';
 
 export default function DealerTab() {
   const Tab = createBottomTabNavigator();
@@ -29,7 +30,7 @@ export default function DealerTab() {
         showLabel: false,
       }}>
       <Tab.Screen name="Requests" component={RequestScreen} />
-      <Tab.Screen name="Schedule" component={Requests} />
+      <Tab.Screen name="Schedule" component={ScheduleScreen} />
       <Tab.Screen name="Notification" component={Requests} />
       <Tab.Screen name="Account" component={Requests} />
     </Tab.Navigator>
