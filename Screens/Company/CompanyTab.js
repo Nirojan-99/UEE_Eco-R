@@ -15,7 +15,7 @@ export default function CompanyTab() {
   const [isVisible, setVisible] = useState(true);
   return (
     <Tab.Navigator
-      initialRouteName="Account"
+      initialRouteName="Product"
       tabBar={props => {
         return isVisible ? <CustomBottomTabBar {...props} /> : null;
       }}

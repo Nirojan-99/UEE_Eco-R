@@ -20,7 +20,9 @@ export default function Login() {
     setCheckboxSelected(pre => !pre);
   };
 
-  const submitHandler = () => {};
+  const submitHandler = () => {
+    
+  };
 
   const navigation = useNavigation();
 

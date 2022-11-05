@@ -15,7 +15,7 @@ export default function DealerTab() {
 
   return (
     <Tab.Navigator
-      initialRouteName="Account"
+      initialRouteName="Requests"
       tabBar={props => {
         return isVisible ? <CustomBottomTabBar {...props} /> : null;
       }}

@@ -11,7 +11,7 @@ export default function ScheduleScreen() {
         headerRight: () => <></>,
         headerLeft: () => <></>,
         headerShown: false,
-        animation: 'slide_from_right',
+        animation: 'fade_from_bottom',
         animationDuration: 0.005,
       }}>
       <Stack.Screen name="Schedules" component={Schedule} />

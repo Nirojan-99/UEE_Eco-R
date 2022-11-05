@@ -15,7 +15,7 @@ export default function CustomerTab() {
 
   return (
     <Tab.Navigator
-      initialRouteName="Account"
+      initialRouteName="Explore"
       tabBar={props => {
         return isVisible ? <CustomBottomTabBar {...props} /> : null;
       }}

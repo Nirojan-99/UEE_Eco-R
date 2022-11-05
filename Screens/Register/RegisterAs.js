@@ -12,7 +12,6 @@ import OutlinedButton from '../../Components/Button/OutlinedButton';
 import {useNavigation} from '@react-navigation/native';
 
 export default function RegisterAs() {
-
   const navigation = useNavigation();
 
   const clickHandler = screen => {
@@ -24,21 +23,25 @@ export default function RegisterAs() {
       <Title text="Register As" />
       {/* btn */}
       <View>
-        <ContainedButton submitHandler={clickHandler} text="Customer">
+        <ContainedButton
+          submitHandler={() => clickHandler('CustomerSignup')}
+          text="Customer">
           <UserIcon color={'#fff'} />
         </ContainedButton>
-        <ContainedButton submitHandler={clickHandler} text="Truck Owner">
+        <ContainedButton
+          submitHandler={() => clickHandler('DealerSignup')}
+          text="Truck Owner">
           <TruckIcon color={'#fff'} />
         </ContainedButton>
-        <ContainedButton submitHandler={clickHandler} text="Company User">
+        <ContainedButton
+          submitHandler={() => clickHandler('CompanySignup')}
+          text="Company User">
           <BuildingOffice2Icon color={'#fff'} />
         </ContainedButton>
       </View>
       {/* back btn */}
       <View className="mt-16">
-        <OutlinedButton
-          submitHandler={() => clickHandler('Home')}
-          text="Login">
+        <OutlinedButton submitHandler={() => clickHandler('Home')} text="Login">
           <ArrowLongLeftIcon color={'#1C6758'} />
         </OutlinedButton>
       </View>
@@ -51,7 +54,7 @@ const ContainedButton = ({text, children, submitHandler}) => {
     <View className="my-[15px]">
       <TouchableOpacity
         activeOpacity={0.5}
-        onPress={() => submitHandler(text.split(' ')[0] + "Signup")}
+        onPress={() => submitHandler(text.split(' ')[0] + 'Signup')}
         className="bg-[#1C6758] rounded-md p-2 flex-row items-center justify-between">
         <View>{children}</View>
         <Text
