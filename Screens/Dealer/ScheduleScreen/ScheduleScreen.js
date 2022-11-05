@@ -7,7 +7,7 @@ export default function ScheduleScreen() {
   const Stack = createNativeStackNavigator();
   return (
     <Stack.Navigator
-      initialRouteName="Products"
+      initialRouteName="Schedules"
       screenOptions={{
         headerRight: () => <></>,
         headerLeft: () => <></>,
