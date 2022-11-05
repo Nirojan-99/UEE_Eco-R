@@ -11,7 +11,7 @@ export default function AccountTabs() {
   const Tab = createMaterialTopTabNavigator();
   return (
     <Tab.Navigator
-      initialRouteName="Transaction"
+      initialRouteName="Vehicle"
       tabBar={props => (
         <View>
           <CustomTabBar {...props} />
