@@ -25,10 +25,10 @@ const App = () => {
       <Gradient>
         <NavigationContainer>
           <Stack.Navigator
-            initialRouteName="Dealer"
+            initialRouteName="Home"
             screenOptions={{
               headerShown: false,
-              animation: 'slide_from_bottom',
+              animation: 'fade_from_bottom',
             }}>
             <Stack.Screen name="Home" component={Login} />
             <Stack.Screen name="RegisterAs" component={RegisterAs} />

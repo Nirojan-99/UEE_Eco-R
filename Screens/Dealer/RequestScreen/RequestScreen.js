@@ -1,8 +1,9 @@
 import React from 'react';
-import Schedule from '../Schedule/Schedule';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import Requests from '../Requests/Requests';
+import CompanyDetails from '../CompanyDetails/CompanyDetails';
 
-export default function ScheduleScreen() {
+export default function RequestScreen() {
   const Stack = createNativeStackNavigator();
   return (
     <Stack.Navigator
@@ -12,9 +13,10 @@ export default function ScheduleScreen() {
         headerLeft: () => <></>,
         headerShown: false,
         animation: 'fade_from_bottom',
-        animationDuration: 0.005,
+        animationDuration: 0.0005,
       }}>
-      <Stack.Screen name="Schedules" component={Schedule} />
+      <Stack.Screen name="Request" component={Requests} />
+      <Stack.Screen name="CompanyDetails" component={CompanyDetails} />
     </Stack.Navigator>
   );
 }

@@ -13,8 +13,14 @@ import {
   BuildingOffice2Icon,
   LockClosedIcon,
 } from 'react-native-heroicons/solid';
+import {useNavigation} from '@react-navigation/native';
 
 export default function Signup() {
+  const navigation = useNavigation();
+
+  const submitHandler = () => {
+    navigation.navigate('Company');
+  };
   return (
     <SafeAreaView>
       <ScrollView>
@@ -70,7 +76,7 @@ export default function Signup() {
           </View>
           {/* btn */}
           <View className="mb-3 mt-5">
-            <ContainedButton text={'SUBMIT'} />
+            <ContainedButton submitHandler={submitHandler} text={'SUBMIT'} />
           </View>
         </View>
       </ScrollView>

@@ -4,6 +4,7 @@ import {
   ScrollView,
   TouchableOpacity,
   TouchableWithoutFeedback,
+  SafeAreaView,
 } from 'react-native';
 import React, {useState} from 'react';
 import Title from '../../../Components/Title/Title';
@@ -18,6 +19,7 @@ import {TextInput} from 'react-native';
 
 import {CalendarDaysIcon, ClockIcon} from 'react-native-heroicons/solid';
 import {useNavigation} from '@react-navigation/native';
+import BackButton from '../../../Components/BackButton/BackButton';
 
 export default function RequestPickup() {
   const [date, setDate] = useState(new Date());
@@ -37,7 +39,7 @@ export default function RequestPickup() {
   };
 
   return (
-    <KeyboardAvoidingView behavior="height">
+    <SafeAreaView>
       <DatePicker
         modal
         mode={mode}
@@ -54,7 +56,12 @@ export default function RequestPickup() {
       <ScrollView>
         <View className="p-3">
           {/* title */}
-          <Title text="Request Pickup" />
+          <View className="flex-row items-center justify-start space-x-3 mb-1">
+            <BackButton />
+            <View>
+              <Title text="Request Pickup" />
+            </View>
+          </View>
           {/* image */}
           <View className="relative">
             <Image source={productbg} className="w-full h-28" />
@@ -170,7 +177,7 @@ export default function RequestPickup() {
           </View>
         </View>
       </ScrollView>
-    </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 }
 

@@ -17,7 +17,7 @@ export default function Explore() {
         headerRight: () => <></>,
         headerLeft: () => <></>,
         headerShown: false,
-        animation: 'slide_from_right',
+        animation: 'fade_from_bottom',
         animationDuration: 0.005,
       }}>
       <Stack.Screen name="Products" component={Products} />
@@ -26,7 +26,10 @@ export default function Explore() {
       <Stack.Screen
         name="Search"
         component={Search}
-        options={{presentation: 'transparentModal', animation: 'slide_from_bottom'}}
+        options={{
+          presentation: 'transparentModal',
+          animation: 'fade_from_bottom',
+        }}
       />
     </Stack.Navigator>
   );

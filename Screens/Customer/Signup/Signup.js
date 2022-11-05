@@ -10,8 +10,13 @@ import {
   UserIcon,
 } from 'react-native-heroicons/solid';
 import ContainedButton from '../../../Components/Button/ContainedButton';
+import {useNavigation} from '@react-navigation/native';
 
 export default function Signup() {
+  const navigation = useNavigation();
+  const submitHandler = () => {
+    navigation.navigate('Customer');
+  };
   return (
     <KeyboardAvoidingView behavior="height" className="mb-6">
       <ScrollView>
@@ -61,7 +66,7 @@ export default function Signup() {
             </View>
             {/* btn */}
             <View className="my-4">
-              <ContainedButton text={'SUBMIT'} submitHandler={() => {}} />
+              <ContainedButton text={'SUBMIT'} submitHandler={submitHandler} />
             </View>
           </View>
         </View>

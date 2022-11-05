@@ -14,7 +14,7 @@ export default function VehicleScreen() {
         headerRight: () => <></>,
         headerLeft: () => <></>,
         headerShown: false,
-        animation: 'slide_from_right',
+        animation: 'fade_from_bottom',
         animationDuration: 0.005,
       }}>
       <Stack.Screen name="Vehicles" component={VehicleTopTab} />
