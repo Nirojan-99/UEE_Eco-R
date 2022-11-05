@@ -1,10 +1,19 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import React from 'react';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import Transaction from '../Transaction/Transaction';
+import PaymentManage from '../PaymentManage/PaymentManage';
 
 export default function Payment() {
+  const Stack = createNativeStackNavigator();
   return (
-    <View>
-      <Text>Payment</Text>
-    </View>
-  )
+    <Stack.Navigator
+      initialRouteName="Transaction"
+      screenOptions={{
+        headerShown: false,
+        animation: 'slide_from_right',
+      }}>
+      <Stack.Screen name="Transaction" component={Transaction} />
+      <Stack.Screen name="PaymentManage" component={PaymentManage} />
+    </Stack.Navigator>
+  );
 }
