@@ -1,4 +1,4 @@
-import {View, Text} from 'react-native';
+import {View} from 'react-native';
 import React from 'react';
 import {SafeAreaView} from 'react-native';
 import {ScrollView} from 'react-native';
@@ -19,7 +19,10 @@ export default function SignupVehicle() {
   };
 
   const navigateSubmit = () => {
-    navigation.navigate('Dealer');
+    navigation.reset({
+      index: 0,
+      routes: [{name: 'Dealer'}],
+    });
   };
   return (
     <SafeAreaView>
@@ -60,7 +63,7 @@ export default function SignupVehicle() {
           </View>
           {/* license num */}
           <View>
-            <Label text={'License Number'} />
+            <Label text={'License Image'} />
             <ImageUploadButton onPress={navigateImage} text={'Upload'}>
               <ArrowUpOnSquareIcon color={'#1C6758'} />
             </ImageUploadButton>

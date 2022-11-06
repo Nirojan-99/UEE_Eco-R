@@ -16,6 +16,7 @@ import CompanyTab from './Screens/Company/CompanyTab';
 import DealerTab from './Screens/Dealer/DealerTab';
 import DealerSignupVehicle from './Screens/Dealer/Signup/SignupVehicle';
 import TakeImage from './Screens/Company/TakeImage/TakeImage';
+import PasswordReset from './Screens/PasswordReset/PasswordReset';
 
 const App = () => {
   const Stack = createNativeStackNavigator();
@@ -25,13 +26,14 @@ const App = () => {
       <Gradient>
         <NavigationContainer>
           <Stack.Navigator
-            initialRouteName="Home"
+            initialRouteName="Customer"
             screenOptions={{
               headerShown: false,
               animation: 'fade_from_bottom',
             }}>
             <Stack.Screen name="Home" component={Login} />
             <Stack.Screen name="RegisterAs" component={RegisterAs} />
+            <Stack.Screen name="PasswordReset" component={PasswordReset} />
             <Stack.Screen name="OTP" component={OTP} />
             <Stack.Screen name="CustomerSignup" component={CustomerSignup} />
             <Stack.Screen name="CompanySignup" component={CompanySignup} />
