@@ -7,8 +7,13 @@ import Input from '../../../Components/Input/Input';
 import ImageUploadButton from '../../../Components/Button/ImageUploadButton';
 import {ArrowUpOnSquareIcon} from 'react-native-heroicons/solid';
 import ContainedButton from '../../../Components/Button/ContainedButton';
+import {useNavigation} from '@react-navigation/native';
 
 export default function Vehicle() {
+  const navigation = useNavigation();
+  const onPress = () => {
+    navigation.navigate('TakeImage');
+  };
   return (
     <SafeAreaView>
       <ScrollView showsVerticalScrollIndicator={false} className="mx-3">
@@ -30,7 +35,7 @@ export default function Vehicle() {
         </View>
         <View>
           <Label text={'Upload Image of Licence'} />
-          <ImageUploadButton text={'Upload'}>
+          <ImageUploadButton onPress={onPress} text={'Upload'}>
             <ArrowUpOnSquareIcon color={'#1C6758'} />
           </ImageUploadButton>
         </View>
