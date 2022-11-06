@@ -19,7 +19,10 @@ export default function Signup() {
   const navigation = useNavigation();
 
   const submitHandler = () => {
-    navigation.navigate('Company');
+    navigation.reset({
+      index: 0,
+      routes: [{name: 'Company'}],
+    });
   };
   return (
     <SafeAreaView>

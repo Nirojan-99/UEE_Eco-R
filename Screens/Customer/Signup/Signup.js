@@ -15,7 +15,10 @@ import {useNavigation} from '@react-navigation/native';
 export default function Signup() {
   const navigation = useNavigation();
   const submitHandler = () => {
-    navigation.navigate('Customer');
+    navigation.reset({
+      index: 0,
+      routes: [{name: 'Customer'}],
+    });
   };
   return (
     <KeyboardAvoidingView behavior="height" className="mb-6">
