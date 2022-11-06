@@ -72,7 +72,7 @@ export default function Schedule() {
         <View className="bg-[#355764]  h-48 top-0 absolute ring-0 left-0 w-full rounded-bl-[40px]" />
         <View className="absolute top-0 ring-0 left-0 w-full">
           <Text className="m-3 font-semibold text-xl text-white ">
-            Collection from dealer
+            Collection from Customer
           </Text>
           <FlatList
             data={data}

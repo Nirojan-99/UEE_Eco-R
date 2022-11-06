@@ -20,8 +20,10 @@ export default function Login() {
     setCheckboxSelected(pre => !pre);
   };
 
-  const submitHandler = () => {
-    
+  const submitHandler = () => {};
+
+  const resetHandler = () => {
+    navigation.navigate('PasswordReset');
   };
 
   const navigation = useNavigation();
@@ -60,7 +62,7 @@ export default function Login() {
                 <Text className="text-black font-normal">Remember me</Text>
               </TouchableOpacity>
               {/* forget password */}
-              <TouchableOpacity>
+              <TouchableOpacity onPress={resetHandler}>
                 <Text className="text-red-500 font-semibold">
                   Forget password?
                 </Text>

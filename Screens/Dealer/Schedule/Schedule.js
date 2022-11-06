@@ -70,7 +70,7 @@ export default function Schedule() {
                 <ListItem.Content style={{borderRadius: 10}}>
                   <ListItem.Title>
                     <Text className="font-semibold text-[#1C6758]">
-                      Pickup Schedule
+                      Handover Schedule
                     </Text>
                   </ListItem.Title>
                 </ListItem.Content>

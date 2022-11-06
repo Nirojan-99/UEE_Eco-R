@@ -16,13 +16,6 @@ export default function TakeImage() {
   return (
     <SafeAreaView className="flex-1 flex-col">
       <ScrollView>
-        {/* head sec */}
-        <View className="mx-3 flex-row items-center justify-start">
-          <BackButton />
-          <View className="ml-3">
-            <Title text={'Upload Image'} />
-          </View>
-        </View>
         {/* body */}
         <View className=" items-center justify-center mx-3  mt-10">
           <View className="my-2 flex-row">
