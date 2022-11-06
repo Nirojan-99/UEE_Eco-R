@@ -9,6 +9,8 @@ export default function Input({
   right,
   disable,
   onClick,
+  value,
+  set,
 }) {
   return (
     <TouchableWithoutFeedback onPress={onClick}>
@@ -24,9 +26,13 @@ export default function Input({
             right ? 'w-11/12 ml-2' : 'w-full'
           }  text-lg p-0 text-[#1C6758]  `}
           multiline={multiline === true}
-          textAlignVertical={"top"}
+          textAlignVertical={'top'}
           numberOfLines={multiline === true ? 4 : 1}
           editable={disable ?? true}
+          value={value}
+          onChangeText={val => {
+            set && set(val);
+          }}
         />
         <View>{right && <View className="">{children}</View>}</View>
       </View>
