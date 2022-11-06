@@ -5,8 +5,8 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import CustomBottomTabBar from '../../Components/CustomBottomTabBar/CustomBottomTabBar';
 import Explore from './Explore/Explore';
-import Schedule from './Schedule/Schedule';
 import Account from './Account/Account';
+import ScheduleScreen from './ScheduleScreen/ScheduleScreen';
 
 export default function CustomerTab() {
   const Tab = createBottomTabNavigator();
@@ -32,7 +32,7 @@ export default function CustomerTab() {
         showLabel: false,
       }}>
       <Tab.Screen name="Explore" component={Explore} />
-      <Tab.Screen name="Schedule" component={Schedule} />
+      <Tab.Screen name="Schedule" component={ScheduleScreen} />
       <Tab.Screen name="Account" component={Account} />
     </Tab.Navigator>
   );
