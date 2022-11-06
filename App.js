@@ -26,7 +26,7 @@ const App = () => {
       <Gradient>
         <NavigationContainer>
           <Stack.Navigator
-            initialRouteName="Customer"
+            initialRouteName="Home"
             screenOptions={{
               headerShown: false,
               animation: 'fade_from_bottom',
