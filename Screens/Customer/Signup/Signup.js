@@ -46,19 +46,22 @@ export default function Signup() {
       name,
       email,
       password,
-      mobile_number,
+      mobileNumber: mobile_number,
       address,
       role: 'customer',
     };
 
     setPressed(true);
-    const res = await submit(user);
-    setPressed(false);
-
-    // navigation.reset({
-    //   index: 0,
-    //   routes: [{name: 'Customer'}],
-    // });
+    const res = await submit(user)
+      .then(res => {
+        navigation.reset({
+          index: 0,
+          routes: [{name: 'Customer'}],
+        });
+      })
+      .catch(er => {
+        setPressed(false);
+      });
   };
 
   const showErrorTost = msg => {
@@ -86,7 +89,7 @@ export default function Signup() {
     try {
       await register(data);
     } catch (error) {
-      console.debug(error)
+      console.debug(error);
       return showErrorTost('Unable to register');
     }
   };
