@@ -6,11 +6,36 @@ import ContainedButton from '../../../Components/Button/ContainedButton';
 import {KeyboardAvoidingView} from 'react-native';
 import {ScrollView} from 'react-native';
 import {SafeAreaView} from 'react-native';
+import {useToast} from 'react-native-toast-notifications';
 
 export default function Profile() {
   const [userName, setUserName] = useState('User Name');
   const [contact, setContact] = useState(778862182);
   const [address, setAddress] = useState('alvai east');
+
+  const submit = () => {
+    if (!userName.toString().trim()) {
+      return showErrorTost('Require valid name');
+    }
+    if (!address.toString().trim()) {
+      return showErrorTost('Require valid address');
+    }
+    if (!contact || isNaN(contact) === true) {
+      return showErrorTost('Require valid mobile number');
+    }
+  };
+
+  const showErrorTost = msg => {
+    toast.show(msg, {
+      type: 'danger',
+      placement: 'bottom',
+      duration: 4000,
+      offset: 0,
+      animationType: 'slide-in',
+    });
+  };
+
+  const toast = useToast();
   return (
     <SafeAreaView>
       <ScrollView>
@@ -43,7 +68,7 @@ export default function Profile() {
               set={setAddress}></ShadowInput>
           </View>
           <View className="mx-3 mt-7">
-            <ContainedButton submitHandler={() => {}} text="UPDATE" />
+            <ContainedButton submitHandler={submit} text="UPDATE" />
           </View>
         </View>
       </ScrollView>

@@ -10,12 +10,43 @@ import ImageUploadButton from '../../../Components/Button/ImageUploadButton';
 import ContainedButton from '../../../Components/Button/ContainedButton';
 import {useNavigation} from '@react-navigation/native';
 import {ArrowUpTrayIcon} from 'react-native-heroicons/solid';
+import {useToast} from 'react-native-toast-notifications';
+import {useState} from 'react';
 
 export default function ManageProduct() {
   const navigation = useNavigation();
 
   const pickImage = () => {
     navigation.navigate('ImageTake');
+  };
+
+  const showErrorTost = msg => {
+    toast.show(msg, {
+      type: 'danger',
+      placement: 'bottom',
+      duration: 4000,
+      offset: 0,
+      animationType: 'slide-in',
+    });
+  };
+
+  const [productName, setProductName] = useState('');
+  const [unitPrice, setUnitPrice] = useState('');
+  const [description, setDescription] = useState('');
+
+  const toast = useToast();
+
+  const submit = () => {
+    if (!productName.toString().trim()) {
+      return showErrorTost('Require valid product name');
+    }
+    if (!unitPrice || isNaN(unitPrice) === true) {
+      return showErrorTost('Require valid unit price');
+    }
+    if (!description.toString().trim()) {
+      return showErrorTost('Require valid description');
+    }
+    navigation.goBack();
   };
 
   return (
@@ -34,17 +65,21 @@ export default function ManageProduct() {
             {/* product */}
             <View>
               <Label text={'Product'} />
-              <Input />
+              <Input value={productName} set={setProductName} />
             </View>
             {/* unit price */}
             <View>
               <Label text={'Unit Price'} />
-              <Input type={'number-pad'} />
+              <Input value={unitPrice} set={setUnitPrice} type={'number-pad'} />
             </View>
             {/* description */}
             <View>
               <Label text={'Description'} />
-              <Input multiline={true} />
+              <Input
+                value={description}
+                set={setDescription}
+                multiline={true}
+              />
             </View>
             {/* description */}
             <View>
@@ -55,7 +90,7 @@ export default function ManageProduct() {
             </View>
             {/* btn */}
             <View className="mt-5">
-              <ContainedButton text={'SUBMIT'} />
+              <ContainedButton submitHandler={submit} text={'SUBMIT'} />
             </View>
           </View>
         </View>

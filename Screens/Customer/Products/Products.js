@@ -3,16 +3,18 @@ import React from 'react';
 import Title from '../../../Components/Title/Title';
 import {MagnifyingGlassCircleIcon} from 'react-native-heroicons/solid';
 import Product from './Product';
-import {useNavigation} from '@react-navigation/native';
+import {useIsFocused, useNavigation} from '@react-navigation/native';
+import {useEffect} from 'react';
+import {useState} from 'react';
+import { getProducts } from '../../../API/productAPI';
 
 export default function Products() {
   // open search modal
   const openSearchModal = () => {
-    navigation.navigate("Search")
+    navigation.navigate('Search');
   };
 
-  //dummy data
-  const data = [1, 2, 3, 4, 5, 6, 7];
+  const [data, setData] = useState([]);
 
   //hook
   const navigation = useNavigation();
@@ -25,6 +27,17 @@ export default function Products() {
   //render
   const renderProducts = ({item}) => {
     return <Product data={item} onRequest={onRequest} />;
+  };
+
+  const isFocus = useIsFocused();
+
+  useEffect(() => {
+    getAllProducts();
+  }, [isFocus]);
+
+  const getAllProducts = async () => {
+    const data = await getProducts();
+    setData(data);
   };
 
   return (

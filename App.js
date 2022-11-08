@@ -24,7 +24,7 @@ const App = () => {
 
   return (
     <ToastProvider
-      placement="top"
+      placement="TOP"
       successColor="green"
       dangerColor="red"
       warningColor="orange"
@@ -33,7 +33,7 @@ const App = () => {
         <Gradient>
           <NavigationContainer>
             <Stack.Navigator
-              initialRouteName="DealerSignupVehicle"
+              initialRouteName="Company"
               screenOptions={{
                 headerShown: false,
                 animation: 'fade_from_bottom',
