@@ -33,7 +33,7 @@ const App = () => {
         <Gradient>
           <NavigationContainer>
             <Stack.Navigator
-              initialRouteName="CompanySignup"
+              initialRouteName="DealerSignupVehicle"
               screenOptions={{
                 headerShown: false,
                 animation: 'fade_from_bottom',

@@ -1,16 +1,15 @@
-import axios from 'axios';
 import {API} from '../Util/env';
 
-const register = async user => {
+const addVehicle = async vehicle => {
   try {
-    const res = await fetch(`http://${API}:5000/users`, {
+    const res = await fetch(`http://${API}:5000/vehicles`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        ...user,
+        ...vehicle,
       }),
     });
 
@@ -26,4 +25,4 @@ const register = async user => {
   }
 };
 
-export {register};
+export {addVehicle};
