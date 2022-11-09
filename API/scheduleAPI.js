@@ -66,5 +66,57 @@ const getSchedules = async () => {
     throw Error(error);
   }
 };
+const getSchedulesOfDealer = async (id) => {
+  try {
+    const res = await fetch(`http://${API}:5000/schedules/dealer/${id}`, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    });
 
-export {addSchedule, getUserSchedule, getSchedules};
+    try {
+      const data = await res.json();
+      return data;
+    } catch (error) {
+      return false;
+    }
+  } catch (error) {
+    console.debug(error);
+    throw Error(error);
+  }
+};
+
+const acceptPickup = async (id, scheduleId) => {
+  try {
+    const res = await fetch(`http://${API}:5000/schedules/${scheduleId}`, {
+      method: 'PUT',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        dealerId: id,
+      }),
+    });
+
+    try {
+      const data = await res.json();
+      return data;
+    } catch (error) {
+      return false;
+    }
+  } catch (error) {
+    console.debug(error);
+    throw Error(error);
+  }
+};
+
+export {
+  addSchedule,
+  getUserSchedule,
+  getSchedules,
+  acceptPickup,
+  getSchedulesOfDealer,
+};

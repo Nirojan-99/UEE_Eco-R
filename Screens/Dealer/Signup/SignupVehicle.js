@@ -18,8 +18,8 @@ export default function SignupVehicle() {
   const navigation = useNavigation();
   const route = useRoute();
 
-  // const {userId} = route?.params;
-  const userId = '636a7bb8085cd8035a4a1eb5';
+  const {userId} = route?.params;
+  // const userId = '636a7bb8085cd8035a4a1eb5';
 
   const navigateImage = () => {
     navigation.navigate('ImageTake');

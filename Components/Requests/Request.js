@@ -10,6 +10,8 @@ import {TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {ArrowRightCircleIcon} from 'react-native-heroicons/solid';
 import {getProduct} from '../../API/productAPI';
+import {acceptPickup} from '../../API/scheduleAPI';
+import {useToast} from 'react-native-toast-notifications';
 
 export default function Request({data}) {
   const navigation = useNavigation();
@@ -30,6 +32,29 @@ export default function Request({data}) {
   useEffect(() => {
     getProductData(data.productId);
   }, []);
+
+  const accept = async () => {
+    try {
+      const res = await acceptPickup('636bf0cbcd1c7f330d3e48c3', data.id);
+      if (res) {
+        showTost('Request accepted');
+      }
+    } catch (error) {
+      showTost('Request not accepted');
+    }
+  };
+
+  const showTost = msg => {
+    toast.show(msg, {
+      type: 'success',
+      placement: 'bottom',
+      duration: 4000,
+      offset: 0,
+      animationType: 'slide-in',
+    });
+  };
+
+  const toast = useToast();
 
   return (
     <View className="bg-white rounded-sm">
@@ -73,7 +98,7 @@ export default function Request({data}) {
         <TouchableOpacity>
           {/* <Text className="text-white font-semibold text-[15px]">Ignore</Text> */}
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={accept}>
           <Text className="text-white font-semibold text-[15px]">
             Accept Pickup
           </Text>

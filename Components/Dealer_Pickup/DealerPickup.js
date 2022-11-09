@@ -1,5 +1,5 @@
 import {View, Text} from 'react-native';
-import React from 'react';
+import React, {useEffect, useLayoutEffect} from 'react';
 import DropShadow from 'react-native-drop-shadow';
 import {Image} from 'react-native';
 import user from '../../Assets/user.png';
@@ -9,13 +9,34 @@ import calendar from '../../Assets/calendar.png';
 import clock from '../../Assets/clock.png';
 import {TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import {getUser} from '../../API/userAPI';
+import {useState} from 'react';
 
-export default function DealerPickup() {
+export default function DealerPickup({data}) {
   const navigation = useNavigation();
 
   const finishPickup = () => {
     navigation.navigate('ScheduleConfirm');
   };
+
+  const [customer, setCustomer] = useState();
+
+  const customerData = async id => {
+    try {
+      const data = await getUser(id);
+      console.debug(data);
+      setCustomer(data);
+    } catch (error) {
+      console.debug(error);
+    }
+  };
+
+  useEffect(() => {}, []);
+
+  useLayoutEffect(() => {
+    customerData(data.customerId);
+  }, []);
+
   return (
     <DropShadow
       style={{
@@ -33,13 +54,13 @@ export default function DealerPickup() {
             <View className="flex-row items-center justify-start space-x-2">
               <Image source={user} style={{width: 20, height: 20}} />
               <Text className="text-[#1C6758] font-semibold " numberOfLines={1}>
-                Customer Name
+                {customer?.name}
               </Text>
             </View>
             <View className="flex-row mt-2 items-center justify-start space-x-2">
               <Image source={key} style={{width: 20, height: 20}} />
               <Text className="text-[#1C6758] font-semibold " numberOfLines={1}>
-                0778863172
+                {customer?.mobileNumber}
               </Text>
             </View>
           </View>
@@ -47,19 +68,19 @@ export default function DealerPickup() {
             <View className="flex-row items-center justify-start space-x-2">
               <Image source={pin} style={{width: 20, height: 20}} />
               <Text className="text-[#1C6758] font-semibold " numberOfLines={1}>
-                Jaffna lane 2
+                {data?.from}
               </Text>
             </View>
             <View className="flex-row mt-2 items-center justify-start space-x-2">
               <Image source={calendar} style={{width: 20, height: 20}} />
               <Text className="text-[#1C6758] font-semibold " numberOfLines={1}>
-                12-12-2022
+                {data?.date}
               </Text>
             </View>
             <View className="flex-row mt-2 items-center justify-start space-x-2">
               <Image source={clock} style={{width: 20, height: 20}} />
               <Text className="text-[#1C6758] font-semibold " numberOfLines={1}>
-                12.00 PM - 2.00 PM
+                {data?.time}
               </Text>
             </View>
           </View>

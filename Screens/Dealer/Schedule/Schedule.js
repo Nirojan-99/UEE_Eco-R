@@ -1,5 +1,5 @@
 import {View, Text, SafeAreaView, ScrollView} from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import Title from '../../../Components/Title/Title';
 import {ListItem} from '@rneui/base';
 import {useState} from 'react';
@@ -7,6 +7,7 @@ import {ArrowDownIcon, ChevronDownIcon} from 'react-native-heroicons/solid';
 import {FlatList} from 'react-native';
 import DealerPickup from '../../../Components/Dealer_Pickup/DealerPickup';
 import DealerHandover from '../../../Components/Dealer_Handover/DealerHandover';
+import {getSchedulesOfDealer} from '../../../API/scheduleAPI';
 
 export default function Schedule() {
   const [pickupExpanded, setPickupExpanded] = useState(false);
@@ -14,13 +15,26 @@ export default function Schedule() {
 
   const data = [1, 2, 3, 4, 5, 6];
 
-  const RenderPickup = () => {
+  const RenderPickup = ({data}) => {
     return (
       <View className="">
-        <DealerPickup />
+        <DealerPickup data={data} />
       </View>
     );
   };
+
+  const [pickUPData, setPickup] = useState([]);
+
+  const fetchpickupdata = async () => {
+    const data = await getSchedulesOfDealer('636bf0cbcd1c7f330d3e48c3');
+    if (data.length > 0) {
+      setPickup(data);
+    }
+  };
+
+  useEffect(() => {
+    fetchpickupdata();
+  }, []);
 
   const RenderHandover = () => {
     return (
@@ -57,8 +71,8 @@ export default function Schedule() {
               setHandoverExpanded(false);
             }}>
             <View>
-              {data.map((item, index) => {
-                return <RenderPickup key={index} />;
+              {pickUPData?.map((item, index) => {
+                return <RenderPickup key={index} data={item} />;
               })}
             </View>
           </ListItem.Accordion>
