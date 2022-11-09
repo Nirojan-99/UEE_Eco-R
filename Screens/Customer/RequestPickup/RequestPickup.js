@@ -6,7 +6,7 @@ import {
   TouchableWithoutFeedback,
   SafeAreaView,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Title from '../../../Components/Title/Title';
 import {Image} from 'react-native';
 import productbg from '../../../Assets/product-bg.png';
@@ -18,39 +18,139 @@ import DatePicker from 'react-native-date-picker';
 import {TextInput} from 'react-native';
 
 import {CalendarDaysIcon, ClockIcon} from 'react-native-heroicons/solid';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import BackButton from '../../../Components/BackButton/BackButton';
+import {getProduct} from '../../../API/productAPI';
+import {dateFormat} from '../../../Util/dateFormat';
+import {timeFormat} from '../../../Util/timeForamt';
+import {useToast} from 'react-native-toast-notifications';
+import {addSchedule} from '../../../API/scheduleAPI';
 
 export default function RequestPickup() {
   const [date, setDate] = useState(new Date());
-  const [open, setOpen] = useState(false);
+  const [dateOpen, setDateOpen] = useState(false);
+  const [fromTimeOpen, setFromTimeOpen] = useState(false);
+  const [toTimeOpen, setToTimeOpen] = useState(false);
   const [mode, setMode] = useState('date');
+
+  const [product, setProduct] = useState({});
+
+  const [unit, setUnit] = useState('');
+  const [selectedDate, setSelectedDate] = useState('');
+  const [fromTime, setFromTime] = useState('');
+  const [endTime, setEndTime] = useState('');
+  const [address, setAddress] = useState('');
 
   //hook
   const navigation = useNavigation();
 
+  const route = useRoute();
+
+  const {productId} = route?.params;
+
   //submit handler
   const submitHandler = () => {
-    // navigation.navigate('Confirm');
-    navigation.reset({
-      index: 1,
-      routes: [{name: 'Products'}, {name: 'Confirm'}],
+    if (!unit || isNaN(unit) === true) {
+      return showErrorTost('Require valid units');
+    }
+    if (!selectedDate.toString().trim()) {
+      return showErrorTost('Require valid date');
+    }
+    if (!fromTime.toString().trim()) {
+      return showErrorTost('Require valid time range');
+    }
+    if (!endTime.toString().trim()) {
+      return showErrorTost('Require valid time range');
+    }
+    if (!address.toString().trim()) {
+      return showErrorTost('Require valid address');
+    }
+
+    const data = {
+      productId: productId,
+      from: address,
+      companyId: '636b9b11a8fcf06a3083d62f',
+      quantity: unit,
+      date: dateFormat(selectedDate),
+      time: timeFormat(fromTime) + ' - ' + timeFormat(endTime),
+      customerId: '636b9961a8fcf06a3083d62e',
+    };
+
+    submitSchedule(data);
+  };
+
+  const showErrorTost = msg => {
+    toast.show(msg, {
+      type: 'danger',
+      placement: 'bottom',
+      duration: 4000,
+      offset: 0,
+      animationType: 'slide-in',
     });
   };
+
+  const submitSchedule = async data => {
+    try {
+      const res = await addSchedule(data);
+      if (res.id) {
+        navigation.reset({
+          index: 1,
+          routes: [{name: 'Products'}, {name: 'Confirm'}],
+        });
+      }
+    } catch (error) {}
+  };
+
+  const toast = useToast();
+
+  const fetchData = async () => {
+    const res = await getProduct(productId);
+    setProduct(res);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
     <SafeAreaView>
       <DatePicker
         modal
         mode={mode}
-        open={open}
+        open={dateOpen}
         date={date}
         onConfirm={date => {
-          setOpen(false);
-          setDate(date);
+          setDateOpen(false);
+          setSelectedDate(date);
         }}
         onCancel={() => {
-          setOpen(false);
+          setDateOpen(false);
+        }}
+      />
+      <DatePicker
+        modal
+        mode={mode}
+        open={fromTimeOpen}
+        date={date}
+        onConfirm={date => {
+          setFromTimeOpen(false);
+          setFromTime(date);
+        }}
+        onCancel={() => {
+          setFromTimeOpen(false);
+        }}
+      />
+      <DatePicker
+        modal
+        mode={mode}
+        open={toTimeOpen}
+        date={date}
+        onConfirm={date => {
+          setToTimeOpen(false);
+          setEndTime(date);
+        }}
+        onCancel={() => {
+          setToTimeOpen(false);
         }}
       />
       <ScrollView>
@@ -75,7 +175,8 @@ export default function RequestPickup() {
                   Product
                 </Text>
                 <Text className="text-[#1C6758] text-md font-semibold flex-1">
-                  {' : '}Used Plastic
+                  {' : '}
+                  {product?.productName}
                 </Text>
               </View>
               {/* product */}
@@ -84,7 +185,8 @@ export default function RequestPickup() {
                   Company
                 </Text>
                 <Text className="text-[#1C6758] text-md font-semibold flex-1">
-                  {' : '}ABC Company
+                  {' : '}
+                  {product?.companyName}
                 </Text>
               </View>
               {/* product */}
@@ -93,7 +195,8 @@ export default function RequestPickup() {
                   Unit Price
                 </Text>
                 <Text className="text-[#1C6758] text-md font-semibold flex-1">
-                  {' : '}200 per Kg
+                  {' : '}
+                  {product?.unitPrice} per Kg
                 </Text>
               </View>
             </View>
@@ -102,22 +205,23 @@ export default function RequestPickup() {
               {/* unit */}
               <View>
                 <Label text="Available Units" />
-                <Input />
+                <Input value={unit} set={setUnit} />
               </View>
               {/* date */}
               <View>
                 <Label text="Select Date" />
                 <Input
+                  value={dateFormat(selectedDate)} //TODO
                   right={true}
                   disable={false}
                   onClick={() => {
                     setMode('date');
-                    setOpen(true);
+                    setDateOpen(true);
                   }}>
                   <TouchableOpacity
                     onPress={() => {
-                      setMode('date');
-                      setOpen(true);
+                      setDateOpen('date');
+                      setDateOpen(true);
                     }}>
                     <CalendarDaysIcon color={'#1C6758'} />
                   </TouchableOpacity>
@@ -128,16 +232,17 @@ export default function RequestPickup() {
               <View className="flex-row items-center space-x-2">
                 <View className="flex-1">
                   <TimeInput
+                    value={timeFormat(fromTime)}
                     onClick={() => {
                       setMode('time');
-                      setOpen(true);
+                      setFromTimeOpen(true);
                     }}
                     right={true}
                     disable={false}>
                     <TouchableOpacity
                       onPress={() => {
                         setMode('time');
-                        setOpen(true);
+                        setFromTimeOpen(true);
                       }}>
                       <ClockIcon color={'#1C6758'} />
                     </TouchableOpacity>
@@ -145,16 +250,17 @@ export default function RequestPickup() {
                 </View>
                 <View className="flex-1">
                   <TimeInput
+                    value={timeFormat(endTime)}
                     onClick={() => {
                       setMode('time');
-                      setOpen(true);
+                      setToTimeOpen(true);
                     }}
                     right={true}
                     disable={false}>
                     <TouchableOpacity
                       onPress={() => {
                         setMode('time');
-                        setOpen(true);
+                        setToTimeOpen(true);
                       }}>
                       <ClockIcon color={'#1C6758'} />
                     </TouchableOpacity>
@@ -164,7 +270,7 @@ export default function RequestPickup() {
               {/* address */}
               <View>
                 <Label text="Address" />
-                <Input multiline={true} />
+                <Input value={address} set={setAddress} multiline={true} />
               </View>
               {/* btn */}
               <View className="mt-4">
@@ -181,7 +287,7 @@ export default function RequestPickup() {
   );
 }
 
-const TimeInput = ({children, onClick}) => {
+const TimeInput = ({children, onClick, value}) => {
   return (
     <TouchableWithoutFeedback onPress={onClick}>
       <View className="flex-row border-[#1C6758] border-2 rounded-lg p-2 items-center">
@@ -190,6 +296,7 @@ const TimeInput = ({children, onClick}) => {
           placeholderTextColor={'#666'}
           className={`font-semibold w-11/12  text-lg p-0 text-[#1C6758]`}
           editable={false}
+          value={value}
         />
         <View className="-ml-2">{children}</View>
       </View>

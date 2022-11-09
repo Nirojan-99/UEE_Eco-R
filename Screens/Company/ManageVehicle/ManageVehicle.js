@@ -9,14 +9,47 @@ import ContainedButton from '../../../Components/Button/ContainedButton';
 import OutlinedButton from '../../../Components/Button/OutlinedButton';
 import {useNavigation} from '@react-navigation/native';
 import {ArrowLongRightIcon} from 'react-native-heroicons/solid';
+import {useToast} from 'react-native-toast-notifications';
+import {useState} from 'react';
 
 export default function ManageVehicle() {
   const navigation = useNavigation();
 
   const submitHandler = () => {
+    if (!vehicleType.toString().trim()) {
+      return showErrorTost('Require valid type');
+    }
+    if (!color.toString().trim()) {
+      return showErrorTost('Require valid color');
+    }
+    if (!vehicleNumber.toString().trim()) {
+      return showErrorTost('Require valid vehicle number');
+    }
+    if (!chassisNumber || isNaN(chassisNumber) === true) {
+      return showErrorTost('Require valid chassis number');
+    }
+
     navigation.goBack();
   };
-  
+
+  //state
+  const toast = useToast();
+
+  const [vehicleType, setType] = useState('');
+  const [vehicleNumber, setVehicleNumber] = useState('');
+  const [chassisNumber, setChassis] = useState('');
+  const [color, setColor] = useState('');
+
+  const showErrorTost = msg => {
+    toast.show(msg, {
+      type: 'danger',
+      placement: 'bottom',
+      duration: 4000,
+      offset: 0,
+      animationType: 'slide-in',
+    });
+  };
+
   const manageDriver = () => {
     navigation.navigate('ManageDriver');
   };
@@ -33,20 +66,20 @@ export default function ManageVehicle() {
         <View className="mx-3 mt-4">
           <View>
             <Label text={'Vehicle Type'} />
-            <Input />
+            <Input value={vehicleType} set={setType} />
             {/* TODO */}
           </View>
           <View>
             <Label text={'Vehicle Number'} />
-            <Input />
+            <Input value={vehicleNumber} set={setVehicleNumber} />
           </View>
           <View>
             <Label text={'Vehicle Color'} />
-            <Input />
+            <Input value={color} set={setColor} />
           </View>
           <View>
             <Label text={'Chassis Number'} />
-            <Input />
+            <Input value={chassisNumber} set={setChassis} />
           </View>
           <View className="my-4">
             <ContainedButton text={'SUBMIT'} submitHandler={submitHandler} />

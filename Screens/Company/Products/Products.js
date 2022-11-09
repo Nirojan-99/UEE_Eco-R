@@ -6,15 +6,18 @@ import {
   FlatList,
   Dimensions,
 } from 'react-native';
-import React from 'react';
+import React, { useLayoutEffect } from 'react';
 import {SafeAreaView} from 'react-native';
 import Title from '../../../Components/Title/Title';
 import {
   ArrowLongRightIcon,
   MagnifyingGlassCircleIcon,
 } from 'react-native-heroicons/solid';
-import {useNavigation} from '@react-navigation/native';
+import {useIsFocused, useNavigation} from '@react-navigation/native';
 import CompanyProduct from '../../../Components/CompanyProduct/CompanyProduct';
+import {getCompanyProduct} from '../../../API/productAPI';
+import {useState} from 'react';
+import {useEffect} from 'react';
 
 export default function Products() {
   const navigation = useNavigation();
@@ -34,11 +37,27 @@ export default function Products() {
     navigation.navigate('Insights');
   };
 
-  const data = [1, 2, 3, 4, 5, 6, 7];
+  // const data = [1, 2, 3, 4, 5, 6, 7];
+  const [data, setData] = useState([]);
 
   const renderItem = ({item}) => {
-    return <CompanyProduct onEdit={editProduct} />;
+    return (
+      <CompanyProduct onLoaded={setLoaded} data={item} onEdit={editProduct} />
+    );
   };
+
+  const getProducts = async () => {
+    const res = await getCompanyProduct();
+    setData(res);
+  };
+
+  useLayoutEffect(() => {
+    getProducts();
+  }, [isFocus, isLoaded]);
+
+  const isFocus = useIsFocused();
+
+  const [isLoaded, setLoaded] = useState(false);
 
   const hight = Dimensions.get('screen').height;
   return (

@@ -17,44 +17,52 @@ import DealerTab from './Screens/Dealer/DealerTab';
 import DealerSignupVehicle from './Screens/Dealer/Signup/SignupVehicle';
 import TakeImage from './Screens/Company/TakeImage/TakeImage';
 import PasswordReset from './Screens/PasswordReset/PasswordReset';
+import {ToastProvider} from 'react-native-toast-notifications';
 
 const App = () => {
   const Stack = createNativeStackNavigator();
 
   return (
-    <SafeAreaView className="flex-1">
-      <Gradient>
-        <NavigationContainer>
-          <Stack.Navigator
-            initialRouteName="Home"
-            screenOptions={{
-              headerShown: false,
-              animation: 'fade_from_bottom',
-            }}>
-            <Stack.Screen name="Home" component={Login} />
-            <Stack.Screen name="RegisterAs" component={RegisterAs} />
-            <Stack.Screen name="PasswordReset" component={PasswordReset} />
-            <Stack.Screen name="OTP" component={OTP} />
-            <Stack.Screen name="CustomerSignup" component={CustomerSignup} />
-            <Stack.Screen name="CompanySignup" component={CompanySignup} />
-            <Stack.Screen name="DealerSignup" component={DealerSignup} />
-            <Stack.Screen
-              name="DealerSignupVehicle"
-              component={DealerSignupVehicle}
-              options={{animation: 'fade_from_bottom'}}
-            />
-            <Stack.Screen
-              name="ImageTake"
-              options={{animation: 'fade_from_bottom'}}
-              component={TakeImage}
-            />
-            <Stack.Screen name="Customer" component={CustomerTab} />
-            <Stack.Screen name="Company" component={CompanyTab} />
-            <Stack.Screen name="Dealer" component={DealerTab} />
-          </Stack.Navigator>
-        </NavigationContainer>
-      </Gradient>
-    </SafeAreaView>
+    <ToastProvider
+      placement="TOP"
+      successColor="green"
+      dangerColor="red"
+      warningColor="orange"
+      normalColor="gray">
+      <SafeAreaView className="flex-1">
+        <Gradient>
+          <NavigationContainer>
+            <Stack.Navigator
+              initialRouteName="Dealer"
+              screenOptions={{
+                headerShown: false,
+                animation: 'fade_from_bottom',
+              }}>
+              <Stack.Screen name="Home" component={Login} />
+              <Stack.Screen name="RegisterAs" component={RegisterAs} />
+              <Stack.Screen name="PasswordReset" component={PasswordReset} />
+              <Stack.Screen name="OTP" component={OTP} />
+              <Stack.Screen name="CustomerSignup" component={CustomerSignup} />
+              <Stack.Screen name="CompanySignup" component={CompanySignup} />
+              <Stack.Screen name="DealerSignup" component={DealerSignup} />
+              <Stack.Screen
+                name="DealerSignupVehicle"
+                component={DealerSignupVehicle}
+                options={{animation: 'fade_from_bottom'}}
+              />
+              <Stack.Screen
+                name="ImageTake"
+                options={{animation: 'fade_from_bottom'}}
+                component={TakeImage}
+              />
+              <Stack.Screen name="Customer" component={CustomerTab} />
+              <Stack.Screen name="Company" component={CompanyTab} />
+              <Stack.Screen name="Dealer" component={DealerTab} />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </Gradient>
+      </SafeAreaView>
+    </ToastProvider>
   );
 };
 

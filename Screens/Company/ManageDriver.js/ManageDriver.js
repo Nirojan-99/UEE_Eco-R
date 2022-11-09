@@ -12,9 +12,11 @@ import {useNavigation} from '@react-navigation/native';
 
 export default function ManageDriver() {
   const navigation = useNavigation();
+
   const submitHandler = () => {
     navigation.goBack();
   };
+  
   return (
     <SafeAreaView>
       <View className="flex-row items-center justify-start space-x-3 mx-3">

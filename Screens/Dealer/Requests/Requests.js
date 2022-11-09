@@ -1,19 +1,33 @@
 import {View, Text} from 'react-native';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {SafeAreaView} from 'react-native';
 import Title from '../../../Components/Title/Title';
 import {FlatList} from 'react-native';
 import Request from '../../../Components/Requests/Request';
+import {getSchedules} from '../../../API/scheduleAPI';
 
 export default function Requests() {
-  const data = [1, 2, 3, 4, 5, 6, 7];
-  const renderItem = () => {
+  const [data, setData] = useState([]);
+
+  const renderItem = ({item}) => {
     return (
       <View className="mb-3">
-        <Request />
+        <Request data={item} />
       </View>
     );
   };
+
+  const fetchData = async () => {
+    try {
+      const data = await getSchedules();
+      setData(data);
+    } catch (error) {}
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
     <SafeAreaView className="flex-1">
       <View className="mx-3">

@@ -42,7 +42,7 @@ export default function Search() {
         </TouchableOpacity>
       </View>
       {/* result */}
-      <FlatList
+      {/* <FlatList
         data={products}
         renderItem={renderItem}
         keyExtractor={(item, index) => index.toString()}
@@ -50,7 +50,7 @@ export default function Search() {
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}
         className="mt-2"
-      />
+      /> */}
     </View>
   );
 }

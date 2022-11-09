@@ -13,7 +13,7 @@ import {
   ArrowRightIcon,
 } from 'react-native-heroicons/solid';
 
-export default function Product({onRequest}) {
+export default function Product({onRequest, data}) {
   return (
     <View className="my-3">
       <ShadowGradientBG>
@@ -24,35 +24,35 @@ export default function Product({onRequest}) {
               <View className="flex-row flex-1 space-x-2 items-center">
                 <Image source={product} className="h-6 w-6" />
                 <Text className="text-[#1C6758] font-semibold ">
-                  Used Plastic
+                  {data.productName}
                 </Text>
               </View>
               {/* product price */}
               <View className="flex-row flex-1 space-x-2 items-center">
                 <Image source={dollar} className="h-6 w-6" />
                 <Text className="text-[#1C6758] font-semibold ">
-                  200Kg per Kg
+                  {data.unitPrice} Rs per Kg
                 </Text>
               </View>
               {/* product company */}
               <View className="flex-row flex-1 space-x-2 items-center">
                 <Image source={company} className="h-6 w-6" />
                 <Text className="text-[#1C6758] font-semibold ">
-                  ABC company
+                  {data.companyName}
                 </Text>
               </View>
               {/* product collection data */}
               <View className="flex-row flex-1 space-x-2 items-center">
                 <Image source={checked} className="h-6 w-6" />
                 <Text className="text-[#1C6758] font-semibold ">
-                  12 successful collections
+                  {data.totalCollection} successful collections
                 </Text>
               </View>
               {/* vehicle */}
               <View className="flex-row flex-1 space-x-2 items-center">
                 <Image source={van} className="h-6 w-6" />
                 <Text className="text-[#1C6758] font-semibold ">
-                  Not available{' '}
+                  {data?.vehicle ?? 'Not available'}
                 </Text>
               </View>
             </View>
@@ -71,7 +71,7 @@ export default function Product({onRequest}) {
             style={{borderBottomRightRadius: 10, borderBottomLeftRadius: 10}}>
             <TouchableOpacity
               className="flex-row items-center space-x-2"
-              onPress={onRequest}>
+              onPress={() => onRequest(data.id)}>
               <Text className="text-white font-semibold text-[15px]">
                 Request Pickup
               </Text>
