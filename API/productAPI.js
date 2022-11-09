@@ -48,6 +48,31 @@ const getCompanyProduct = async () => {
   }
 };
 
+const deleteProduct = async id => {
+  try {
+    const res = await fetch(
+      `http://${API}:5000/products/${id}/636b9b11a8fcf06a3083d62f`,
+      {
+        method: 'DELETE',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+      },
+    );
+
+    try {
+      const data = await res.json();
+      return data;
+    } catch (error) {
+      return false;
+    }
+  } catch (error) {
+    console.debug(error);
+    throw Error(error);
+  }
+};
+
 const addProducts = async product => {
   try {
     const res = await fetch(
@@ -76,4 +101,4 @@ const addProducts = async product => {
   }
 };
 
-export {getProducts, addProducts, getCompanyProduct};
+export {getProducts, addProducts, getCompanyProduct, deleteProduct};

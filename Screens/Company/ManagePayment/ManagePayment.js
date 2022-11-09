@@ -16,6 +16,7 @@ import {
 } from 'react-native-heroicons/solid';
 import {useToast} from 'react-native-toast-notifications';
 import {SafeAreaView} from 'react-native';
+import {updatePayment} from '../../../API/userAPI';
 
 export default function ManagePayment() {
   const [monthOpen, setMonthOpen] = useState(false);
@@ -35,7 +36,18 @@ export default function ManagePayment() {
     navigation.goBack();
   };
 
-  const submit = () => {
+  const submitData = async data => {
+    try {
+      const res = await updatePayment(data, '636b9b11a8fcf06a3083d62f');
+      if (res) {
+        navigation.goBack();
+      }
+    } catch (error) {
+      return showErrorTost('Unable to update');
+    }
+  };
+
+  const submit = async () => {
     if (!cardHolder.toString().trim()) {
       return showErrorTost('Require valid holder name');
     }
@@ -52,7 +64,15 @@ export default function ManagePayment() {
       return showErrorTost('Require valid cvv');
     }
 
-    navigation.goBack();
+    const data = {
+      nameOnCard: cardHolder,
+      cardNumber: cardNumber,
+      expiryMonth: selectedMonth,
+      expiryYear: selectedYear,
+      cvv: cvv,
+    };
+
+    await submitData(data);
   };
 
   const showErrorTost = msg => {

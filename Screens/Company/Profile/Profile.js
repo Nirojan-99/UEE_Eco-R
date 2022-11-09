@@ -1,19 +1,21 @@
 import {View, Text, Image} from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import user from '../../../Assets/user.png';
 import ShadowInput from '../../../Components/ShadowInput/ShadowInput';
 import ContainedButton from '../../../Components/Button/ContainedButton';
-import {KeyboardAvoidingView} from 'react-native';
 import {ScrollView} from 'react-native';
 import {SafeAreaView} from 'react-native';
 import {useToast} from 'react-native-toast-notifications';
+import {getUser, updateUser} from '../../../API/userAPI';
+import {useIsFocused} from '@react-navigation/native';
 
 export default function Profile() {
-  const [userName, setUserName] = useState('User Name');
-  const [contact, setContact] = useState(778862182);
-  const [address, setAddress] = useState('alvai east');
+  const [userName, setUserName] = useState('');
+  const [contact, setContact] = useState('');
+  const [address, setAddress] = useState('');
+  const [email, setEmail] = useState('');
 
-  const submit = () => {
+  const submit = async () => {
     if (!userName.toString().trim()) {
       return showErrorTost('Require valid name');
     }
@@ -23,6 +25,7 @@ export default function Profile() {
     if (!contact || isNaN(contact) === true) {
       return showErrorTost('Require valid mobile number');
     }
+    await update();
   };
 
   const showErrorTost = msg => {
@@ -34,6 +37,45 @@ export default function Profile() {
       animationType: 'slide-in',
     });
   };
+  const showInfoTost = msg => {
+    toast.show(msg, {
+      type: 'success',
+      placement: 'bottom',
+      duration: 4000,
+      offset: 0,
+      animationType: 'slide-in',
+    });
+  };
+
+  const update = async () => {
+    try {
+      await updateUser(userName, contact, address, '636b9b11a8fcf06a3083d62f');
+      setLoaded(pre => !pre);
+      showInfoTost('Updated');
+    } catch (error) {
+      return showErrorTost('Unable to update');
+    }
+  };
+
+  const fetchUser = async () => {
+    try {
+      const data = await getUser('636b9b11a8fcf06a3083d62f');
+      console.debug(data);
+      setUserName(data.name);
+      setContact(data.mobileNumber);
+      setAddress(data.address);
+      setEmail(data.email);
+      setLoaded(pre => !pre);
+    } catch (error) {}
+  };
+
+  useEffect(() => {
+    fetchUser();
+  }, [isLoaded, isFocus]);
+
+  const isFocus = useIsFocused();
+
+  const [isLoaded, setLoaded] = useState(false);
 
   const toast = useToast();
   return (
@@ -49,7 +91,7 @@ export default function Profile() {
           {/* email */}
           <View className="flex-row items-center justify-center">
             <Text className="text-[#1C6758] text-lg font-semibold ">
-              email@gmail.com
+              {email}
             </Text>
           </View>
           {/* body */}
@@ -58,7 +100,7 @@ export default function Profile() {
           </View>
           <View className="mx-3 mt-5">
             <ShadowInput
-              text={contact.toString()}
+              text={contact?.toString()}
               set={setContact}></ShadowInput>
           </View>
           <View className="mx-3 mt-5">

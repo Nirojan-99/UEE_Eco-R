@@ -7,7 +7,8 @@ import pass from '../../../Assets/pass.png';
 import {Image} from 'react-native';
 import {SafeAreaView} from 'react-native';
 import {useState} from 'react';
-import { useToast } from 'react-native-toast-notifications';
+import {useToast} from 'react-native-toast-notifications';
+import {updatePassword} from '../../../API/userAPI';
 
 export default function Security() {
   const [password, setPassword] = useState('');
@@ -26,7 +27,17 @@ export default function Security() {
     });
   };
 
-  const submit = () => {
+  const showInfoTost = msg => {
+    toast.show(msg, {
+      type: 'success',
+      placement: 'bottom',
+      duration: 4000,
+      offset: 0,
+      animationType: 'slide-in',
+    });
+  };
+
+  const submit = async () => {
     if (!oldPassword.toString().trim()) {
       return showErrorTost('Require valid password');
     }
@@ -39,7 +50,22 @@ export default function Security() {
     if (password !== confirm_password) {
       return showErrorTost("Passwords didn't match");
     }
+
+    await update();
   };
+
+  const update = async () => {
+    try {
+      const res = await updatePassword(password, '636b9b11a8fcf06a3083d62f');
+      if (res) {
+        setConfirmPassword('');
+        setPassword('');
+        setOldPassword('');
+        showInfoTost('Updated');
+      }
+    } catch (error) {}
+  };
+
   return (
     <SafeAreaView>
       <ScrollView>

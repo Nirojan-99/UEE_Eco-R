@@ -6,7 +6,7 @@ import {
   FlatList,
   Dimensions,
 } from 'react-native';
-import React from 'react';
+import React, { useLayoutEffect } from 'react';
 import {SafeAreaView} from 'react-native';
 import Title from '../../../Components/Title/Title';
 import {
@@ -41,7 +41,9 @@ export default function Products() {
   const [data, setData] = useState([]);
 
   const renderItem = ({item}) => {
-    return <CompanyProduct data={item} onEdit={editProduct} />;
+    return (
+      <CompanyProduct onLoaded={setLoaded} data={item} onEdit={editProduct} />
+    );
   };
 
   const getProducts = async () => {
@@ -49,11 +51,13 @@ export default function Products() {
     setData(res);
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     getProducts();
-  }, [isFocus]);
+  }, [isFocus, isLoaded]);
 
   const isFocus = useIsFocused();
+
+  const [isLoaded, setLoaded] = useState(false);
 
   const hight = Dimensions.get('screen').height;
   return (
