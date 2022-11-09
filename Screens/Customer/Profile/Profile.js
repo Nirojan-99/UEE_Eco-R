@@ -1,4 +1,4 @@
-import {View, Text, Image} from 'react-native';
+import {View, Text, Image, TouchableOpacity} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import user from '../../../Assets/user.png';
 import ShadowInput from '../../../Components/ShadowInput/ShadowInput';
@@ -7,7 +7,8 @@ import {ScrollView} from 'react-native';
 import {SafeAreaView} from 'react-native';
 import {useToast} from 'react-native-toast-notifications';
 import {getUser, updateUser} from '../../../API/userAPI';
-import {useIsFocused} from '@react-navigation/native';
+import {useIsFocused, useNavigation} from '@react-navigation/native';
+import OutlinedButton from '../../../Components/Button/OutlinedButton';
 
 export default function Profile() {
   const [userName, setUserName] = useState('');
@@ -77,6 +78,15 @@ export default function Profile() {
   const [isLoaded, setLoaded] = useState(false);
 
   const toast = useToast();
+  const navigation = useNavigation();
+
+  const logout = () => {
+    navigation.reset({
+      index: 0,
+      routes: [{name: 'Home'}],
+    });
+  };
+
   return (
     <SafeAreaView>
       <ScrollView>
@@ -110,6 +120,15 @@ export default function Profile() {
           </View>
           <View className="mx-3 mt-7">
             <ContainedButton submitHandler={submit} text="UPDATE" />
+          </View>
+          <View className="mx-3 mt-7 flex-row justify-end">
+            <TouchableOpacity
+              onPress={logout}
+              className="bg-slate-400 px-5 py-1 rounded-md">
+              <Text className="text-[#1C6758] font-bold text-lg text-left">
+                Logout
+              </Text>
+            </TouchableOpacity>
           </View>
         </View>
       </ScrollView>

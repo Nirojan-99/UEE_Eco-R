@@ -83,7 +83,7 @@ export default function Signup() {
   const submit = async data => {
     try {
       const res = await register(data);
-      navigation.navigate('DealerSignupVehicle', {userId: res});
+      navigation.navigate('DealerSignupVehicle', {userId: res.id});
     } catch (error) {
       console.debug(error);
       return showErrorTost('Unable to register');

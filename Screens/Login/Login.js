@@ -35,11 +35,20 @@ export default function Login() {
     console.debug(res);
 
     if (res === 'company') {
-      navigation.navigate('Company');
+      navigation.reset({
+        index: 0,
+        routes: [{name: 'Company'}],
+      });
     } else if (res === 'customer') {
-      navigation.navigate('Customer');
+      navigation.reset({
+        index: 0,
+        routes: [{name: 'Customer'}],
+      });
     } else if (res === 'dealer') {
-      navigation.navigate('Dealer');
+      navigation.reset({
+        index: 0,
+        routes: [{name: 'Dealer'}],
+      });
     } else {
       return showErrorTost('Invalid credentials');
     }

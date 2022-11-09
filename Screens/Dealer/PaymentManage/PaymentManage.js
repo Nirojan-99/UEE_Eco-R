@@ -14,14 +14,21 @@ import {
   ArrowLeftCircleIcon,
   ArrowRightCircleIcon,
 } from 'react-native-heroicons/solid';
+import {useToast} from 'react-native-toast-notifications';
+import {SafeAreaView} from 'react-native';
+import {updatePayment} from '../../../API/userAPI';
 
-export default function PaymentManage() {
+export default function ManagePayment() {
   const [monthOpen, setMonthOpen] = useState(false);
   const [yearOpen, setYearOpen] = useState(false);
-  const [selectedMonth, setSelectedMonth] = useState(null);
-  const [selectedYear, setSelectedYear] = useState(null);
   const [months, setMonth] = useState([...month]);
   const [years, setYear] = useState([...year]);
+
+  const [selectedMonth, setSelectedMonth] = useState(null);
+  const [selectedYear, setSelectedYear] = useState(null);
+  const [cardNumber, setCardNumber] = useState('');
+  const [cardHolder, setCardHolder] = useState('');
+  const [cvv, setCVV] = useState('');
 
   const navigation = useNavigation();
 
@@ -29,10 +36,60 @@ export default function PaymentManage() {
     navigation.goBack();
   };
 
+  const submitData = async data => {
+    try {
+      const res = await updatePayment(data, '636bf0cbcd1c7f330d3e48c3');
+      if (res) {
+        navigation.goBack();
+      }
+    } catch (error) {
+      return showErrorTost('Unable to update');
+    }
+  };
+
+  const submit = async () => {
+    if (!cardHolder.toString().trim()) {
+      return showErrorTost('Require valid holder name');
+    }
+    if (!cardNumber || isNaN(cardNumber) === true) {
+      return showErrorTost('Require valid card number');
+    }
+    if (!selectedMonth || isNaN(selectedMonth) === true) {
+      return showErrorTost('Require valid month');
+    }
+    if (!selectedYear || isNaN(selectedYear) === true) {
+      return showErrorTost('Require valid year');
+    }
+    if (!cvv || isNaN(cvv) === true || cvv.length !== 3) {
+      return showErrorTost('Require valid cvv');
+    }
+
+    const data = {
+      nameOnCard: cardHolder,
+      cardNumber: cardNumber,
+      expiryMonth: selectedMonth,
+      expiryYear: selectedYear,
+      cvv: cvv,
+    };
+
+    await submitData(data);
+  };
+
+  const showErrorTost = msg => {
+    toast.show(msg, {
+      type: 'danger',
+      placement: 'bottom',
+      duration: 4000,
+      offset: 0,
+      animationType: 'slide-in',
+    });
+  };
+
+  const toast = useToast();
+
   return (
-    <View className="mt-3 px-3 flex-1">
-      {/* <ScrollView className="flex-1"> */}
-      <KeyboardAvoidingView behavior="height" className="mb-6 flex-1">
+    <SafeAreaView className="mt-3 px-3 flex-1">
+      <ScrollView>
         <TouchableWithoutFeedback
           className="bg-red-400"
           onPress={() => {
@@ -43,12 +100,16 @@ export default function PaymentManage() {
             {/* card holder */}
             <View>
               <Label text={'Card holder name'} />
-              <Input />
+              <Input value={cardHolder} set={setCardHolder} />
             </View>
             {/* card number */}
             <View>
               <Label text={'Card number'} />
-              <Input type={'number-pad'} />
+              <Input
+                value={cardNumber}
+                set={setCardNumber}
+                type={'number-pad'}
+              />
             </View>
             {/* expiry */}
             <View className="flex-row items-center space-x-2">
@@ -94,11 +155,11 @@ export default function PaymentManage() {
             {/* card holder */}
             <View>
               <Label text={'CVV'} />
-              <Input type={'number-pad'} />
+              <Input value={cvv} set={setCVV} type={'number-pad'} />
             </View>
             {/* submit */}
             <View className="mt-7">
-              <ContainedButton submitHandler={navigateBack} text={'UPDATE'} />
+              <ContainedButton submitHandler={submit} text={'UPDATE'} />
             </View>
             <View className="mt-5  flex-row justify-end">
               <TouchableOpacity
@@ -112,8 +173,7 @@ export default function PaymentManage() {
             </View>
           </View>
         </TouchableWithoutFeedback>
-      </KeyboardAvoidingView>
-      {/* </ScrollView> */}
-    </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
