@@ -7,7 +7,7 @@ import checked from '../../Assets/checked.png';
 import requirement from '../../Assets/requirement.png';
 import {PencilIcon, TrashIcon} from 'react-native-heroicons/solid';
 
-export default function CompanyProduct({onEdit}) {
+export default function CompanyProduct({onEdit, data}) {
   const width = Dimensions.get('screen').width;
   const hight = Dimensions.get('screen').height;
 
@@ -22,7 +22,7 @@ export default function CompanyProduct({onEdit}) {
         {/* body */}
         <View className="flex-col p-2">
           <Text className="text-[#1C6758] text-lg font-bold">
-            Used Plastic Water Bottle
+            {data?.productName}
           </Text>
           {/* row 1 */}
           <View className="flex-row items-center justify-start mt-1">
@@ -31,7 +31,7 @@ export default function CompanyProduct({onEdit}) {
               style={{height: hight * 0.03, width: hight * 0.03}}
             />
             <Text className="text-gray-500 text-sm font-semibold ml-2">
-              100 Rs per Kg
+              {data?.unitPrice} Rs per Kg
             </Text>
           </View>
           {/* row 2 */}
@@ -41,7 +41,7 @@ export default function CompanyProduct({onEdit}) {
               style={{height: hight * 0.03, width: hight * 0.03}}
             />
             <Text className="text-gray-500 text-sm font-semibold ml-2">
-              100Kg collected
+              {data?.totalCollection}Kg collected
             </Text>
           </View>
           {/* row 3 */}
@@ -50,8 +50,10 @@ export default function CompanyProduct({onEdit}) {
               source={requirement}
               style={{height: hight * 0.03, width: hight * 0.03}}
             />
-            <Text className="text-gray-500 text-sm font-semibold ml-2">
-              100 Rs per Kg
+            <Text
+              numberOfLines={1}
+              className="text-gray-500 text-sm font-semibold ml-2">
+              {data?.description}
             </Text>
           </View>
         </View>

@@ -1,13 +1,16 @@
 import {View, Text} from 'react-native';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {SafeAreaView} from 'react-native';
 import BackButton from '../../../Components/BackButton/BackButton';
 import Title from '../../../Components/Title/Title';
 import {FlatList} from 'react-native';
 import ProductInsight from '../../../Components/ProductInsight/ProductInsight';
+import {getCompanyProduct} from '../../../API/productAPI';
+import {useIsFocused} from '@react-navigation/native';
 
 export default function Insights() {
-  const data = [1, 2, 3, 4, 5, 6];
+  // const data = [1, 2, 3, 4, 5, 6];
+  const [data, setData] = useState([]);
 
   const renderItem = ({item}) => {
     return (
@@ -15,6 +18,17 @@ export default function Insights() {
         <ProductInsight data={item} />
       </View>
     );
+  };
+
+  const isFocus = useIsFocused();
+
+  useEffect(() => {
+    getProducts();
+  }, [isFocus]);
+
+  const getProducts = async () => {
+    const res = await getCompanyProduct();
+    setData(res);
   };
 
   return (

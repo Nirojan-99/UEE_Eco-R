@@ -3,7 +3,7 @@ import React from 'react';
 import {Image} from 'react-native';
 import plastic from '../../Assets/plastic-img.png';
 
-export default function ProductInsight() {
+export default function ProductInsight({data}) {
   return (
     <View className="flex-1 bg-white  mr-3 rounded-lg ">
       <Image
@@ -15,13 +15,13 @@ export default function ProductInsight() {
         <Text
           numberOfLines={1}
           className="text-[15px] font-semibold text-[#1C6758]">
-          Used Plastic Water Bottle
+          {data.productName}
         </Text>
         <Text className="text-[12px]  text-slate-400 mt-1">
-          Total Collection : 12Kg
+          Total Collection : {data.totalCollection} Kg
         </Text>
         <Text className="text-[12px]  text-slate-400 mt-1 mb-3">
-          Total Collection : Rs 12,00.00
+          Total Collection : Rs {data?.totalCollection * data?.unitPrice}
         </Text>
       </View>
     </View>

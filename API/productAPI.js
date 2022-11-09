@@ -23,6 +23,31 @@ const getProducts = async () => {
   }
 };
 
+const getCompanyProduct = async () => {
+  try {
+    const res = await fetch(
+      `http://${API}:5000/users/company/636b9b11a8fcf06a3083d62f`,
+      {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+      },
+    );
+
+    try {
+      const data = await res.json();
+      return data;
+    } catch (error) {
+      return false;
+    }
+  } catch (error) {
+    console.debug(error);
+    throw Error(error);
+  }
+};
+
 const addProducts = async product => {
   try {
     const res = await fetch(
@@ -51,4 +76,4 @@ const addProducts = async product => {
   }
 };
 
-export {getProducts, addProducts};
+export {getProducts, addProducts, getCompanyProduct};
