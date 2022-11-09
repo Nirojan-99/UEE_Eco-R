@@ -22,6 +22,28 @@ const getProducts = async () => {
     throw Error(error);
   }
 };
+const getProduct = async id => {
+  try {
+    const res = await fetch(`http://${API}:5000/products/${id}`, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    });
+
+    try {
+      const data = await res.json();
+      
+      return data;
+    } catch (error) {
+      return false;
+    }
+  } catch (error) {
+    console.debug(error);
+    throw Error(error);
+  }
+};
 
 const getCompanyProduct = async () => {
   try {
@@ -101,4 +123,4 @@ const addProducts = async product => {
   }
 };
 
-export {getProducts, addProducts, getCompanyProduct, deleteProduct};
+export {getProducts, addProducts, getCompanyProduct, deleteProduct, getProduct};

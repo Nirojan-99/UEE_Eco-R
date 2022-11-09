@@ -60,7 +60,6 @@ export default function ManageProduct() {
 
     try {
       const res = await addProducts(data);
-      console.debug(res);
 
       if (res.unitPrice) {
         navigation.goBack();

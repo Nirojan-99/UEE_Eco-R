@@ -60,7 +60,7 @@ export default function Profile() {
   const fetchUser = async () => {
     try {
       const data = await getUser('636b9b11a8fcf06a3083d62f');
-      console.debug(data);
+
       setUserName(data.name);
       setContact(data.mobileNumber);
       setAddress(data.address);

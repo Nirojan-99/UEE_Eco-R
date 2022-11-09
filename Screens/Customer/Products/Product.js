@@ -31,7 +31,7 @@ export default function Product({onRequest, data}) {
               <View className="flex-row flex-1 space-x-2 items-center">
                 <Image source={dollar} className="h-6 w-6" />
                 <Text className="text-[#1C6758] font-semibold ">
-                  {data.unitPrice}Rs per Kg
+                  {data.unitPrice} Rs per Kg
                 </Text>
               </View>
               {/* product company */}
@@ -71,7 +71,7 @@ export default function Product({onRequest, data}) {
             style={{borderBottomRightRadius: 10, borderBottomLeftRadius: 10}}>
             <TouchableOpacity
               className="flex-row items-center space-x-2"
-              onPress={onRequest}>
+              onPress={() => onRequest(data.id)}>
               <Text className="text-white font-semibold text-[15px]">
                 Request Pickup
               </Text>

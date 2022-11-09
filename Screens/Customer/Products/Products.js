@@ -6,7 +6,7 @@ import Product from './Product';
 import {useIsFocused, useNavigation} from '@react-navigation/native';
 import {useEffect} from 'react';
 import {useState} from 'react';
-import { getProducts } from '../../../API/productAPI';
+import {getProducts} from '../../../API/productAPI';
 
 export default function Products() {
   // open search modal
@@ -20,8 +20,8 @@ export default function Products() {
   const navigation = useNavigation();
 
   //request navigation
-  const onRequest = ({product}) => {
-    navigation.navigate('Request');
+  const onRequest = (id) => {
+    navigation.navigate('Request', {productId: id});
   };
 
   //render

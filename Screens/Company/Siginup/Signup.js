@@ -92,7 +92,6 @@ export default function Signup() {
         routes: [{name: 'Company'}],
       });
     } catch (error) {
-      console.debug(error);
       return showErrorTost('Unable to register');
     }
   };
