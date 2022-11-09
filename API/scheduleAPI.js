@@ -45,5 +45,26 @@ const getUserSchedule = async userId => {
     throw Error(error);
   }
 };
+const getSchedules = async () => {
+  try {
+    const res = await fetch(`http://${API}:5000/schedules/`, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    });
 
-export {addSchedule, getUserSchedule};
+    try {
+      const data = await res.json();
+      return data;
+    } catch (error) {
+      return false;
+    }
+  } catch (error) {
+    console.debug(error);
+    throw Error(error);
+  }
+};
+
+export {addSchedule, getUserSchedule, getSchedules};

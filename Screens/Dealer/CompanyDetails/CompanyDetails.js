@@ -1,5 +1,5 @@
 import {View, Text} from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {SafeAreaView} from 'react-native';
 import BackButton from '../../../Components/BackButton/BackButton';
 import Title from '../../../Components/Title/Title';
@@ -9,8 +9,27 @@ import company from '../../../Assets/company-green.png';
 import user from '../../../Assets/user.png';
 import key from '../../../Assets/key.png';
 import pin from '../../../Assets/pin.png';
+import {useRoute} from '@react-navigation/native';
+import {useState} from 'react';
+import {getUser} from '../../../API/userAPI';
 
 export default function CompanyDetails() {
+  const route = useRoute();
+  const {companyId} = route?.params;
+
+  const getUserData = async () => {
+    try {
+      const data = await getUser(companyId);
+      setCompany(data);
+    } catch (error) {}
+  };
+
+  const [companyData, setCompany] = useState();
+
+  useEffect(() => {
+    getUserData();
+  }, []);
+
   return (
     <SafeAreaView>
       {/* head */}
@@ -36,20 +55,26 @@ export default function CompanyDetails() {
             <View className="flex-row items-center justify-start space-x-3">
               <Image source={company} style={{height: 20, width: 20}} />
               <Text className="text-[#1C6758] font-semibold ">
-                Company Name
+                {companyData?.companyName}
               </Text>
             </View>
             <View className="flex-row items-center justify-start mt-3 space-x-3">
               <Image source={user} style={{height: 20, width: 20}} />
-              <Text className="text-[#1C6758] font-semibold ">User name</Text>
+              <Text className="text-[#1C6758] font-semibold ">
+                {companyData?.name}
+              </Text>
             </View>
             <View className="flex-row items-center justify-start mt-3 space-x-3">
               <Image source={key} style={{height: 20, width: 20}} />
-              <Text className="text-[#1C6758] font-semibold ">0778862172</Text>
+              <Text className="text-[#1C6758] font-semibold ">
+                {companyData?.mobileNumber}
+              </Text>
             </View>
             <View className="flex-row items-center justify-start mt-3 space-x-3">
               <Image source={pin} style={{height: 20, width: 20}} />
-              <Text className="text-[#1C6758] font-semibold ">address</Text>
+              <Text className="text-[#1C6758] font-semibold ">
+                {companyData?.address}
+              </Text>
             </View>
           </View>
         </View>
