@@ -12,6 +12,8 @@ import OutlinedButton from '../../Components/Button/OutlinedButton';
 import {KeyboardAvoidingView} from 'react-native';
 import {ScrollView} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import {login} from '../../API/userAPI';
+import {useToast} from 'react-native-toast-notifications';
 
 export default function Login() {
   const [checkBoxSelected, setCheckboxSelected] = useState(false);
@@ -20,13 +22,49 @@ export default function Login() {
     setCheckboxSelected(pre => !pre);
   };
 
-  const submitHandler = () => {};
+  const submitHandler = async () => {
+    if (!email.toString().trim()) {
+      return showErrorTost('Require valid email');
+    }
+    if (!password.toString().trim()) {
+      return showErrorTost('Require valid password');
+    }
+
+    var res = await login(email, password);
+    res = res.role;
+    console.debug(res);
+
+    if (res === 'company') {
+      navigation.navigate('Company');
+    } else if (res === 'customer') {
+      navigation.navigate('Customer');
+    } else if (res === 'dealer') {
+      navigation.navigate('Dealer');
+    } else {
+      return showErrorTost('Invalid credentials');
+    }
+  };
+
+  const showErrorTost = msg => {
+    toast.show(msg, {
+      type: 'danger',
+      placement: 'bottom',
+      duration: 4000,
+      offset: 0,
+      animationType: 'slide-in',
+    });
+  };
+
+  const toast = useToast();
 
   const resetHandler = () => {
     navigation.navigate('PasswordReset');
   };
 
   const navigation = useNavigation();
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   return (
     <ScrollView>
@@ -36,13 +74,21 @@ export default function Login() {
           <View className="mt-7">
             {/* email */}
             <View className="mb-7">
-              <Input type="email-address" placeHolder="User Name">
+              <Input
+                value={email}
+                set={setEmail}
+                type="email-address"
+                placeHolder="User Name">
                 <UserIcon color={'#1C6758'} />
               </Input>
             </View>
             {/* password */}
             <View className="mb-5">
-              <Input type="password" placeHolder="Password">
+              <Input
+                value={password}
+                set={setPassword}
+                type="password"
+                placeHolder="Password">
                 <LockClosedIcon color={'#1C6758'} />
               </Input>
             </View>

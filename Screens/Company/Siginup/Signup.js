@@ -60,7 +60,6 @@ export default function Signup() {
     setPressed(true);
     const res = await submit(user);
     setPressed(false);
-    
   };
 
   const showErrorTost = msg => {
@@ -90,7 +89,7 @@ export default function Signup() {
       await register(data);
       navigation.reset({
         index: 0,
-        routes: [{name: 'Customer'}],
+        routes: [{name: 'Company'}],
       });
     } catch (error) {
       console.debug(error);

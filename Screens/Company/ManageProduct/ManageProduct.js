@@ -12,6 +12,7 @@ import {useNavigation} from '@react-navigation/native';
 import {ArrowUpTrayIcon} from 'react-native-heroicons/solid';
 import {useToast} from 'react-native-toast-notifications';
 import {useState} from 'react';
+import {addProducts} from '../../../API/productAPI';
 
 export default function ManageProduct() {
   const navigation = useNavigation();
@@ -36,7 +37,7 @@ export default function ManageProduct() {
 
   const toast = useToast();
 
-  const submit = () => {
+  const submit = async () => {
     if (!productName.toString().trim()) {
       return showErrorTost('Require valid product name');
     }
@@ -46,7 +47,30 @@ export default function ManageProduct() {
     if (!description.toString().trim()) {
       return showErrorTost('Require valid description');
     }
-    navigation.goBack();
+
+    const data = {
+      productName: productName,
+      unitPrice: unitPrice,
+      description: description,
+      image:
+        'https://www.rubicon.com/wp-content/uploads/2021/07/shutterstock_1555474487-scaled.jpg',
+      totalCollection: 0,
+      companyName: 'Asec company',
+    };
+
+    try {
+      const res = await addProducts(data);
+      console.debug(res);
+
+      if (res.unitPrice) {
+        navigation.goBack();
+      } else {
+        return showErrorTost('Unable to add product');
+      }
+    } catch (error) {
+      return showErrorTost('Unable to add product');
+      // navigation.goBack();
+    }
   };
 
   return (

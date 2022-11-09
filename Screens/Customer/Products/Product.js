@@ -38,7 +38,7 @@ export default function Product({onRequest, data}) {
               <View className="flex-row flex-1 space-x-2 items-center">
                 <Image source={company} className="h-6 w-6" />
                 <Text className="text-[#1C6758] font-semibold ">
-                  {}
+                  {data.companyName}
                 </Text>
               </View>
               {/* product collection data */}
@@ -52,7 +52,7 @@ export default function Product({onRequest, data}) {
               <View className="flex-row flex-1 space-x-2 items-center">
                 <Image source={van} className="h-6 w-6" />
                 <Text className="text-[#1C6758] font-semibold ">
-                  Not available{' '}
+                  {data?.vehicle ?? 'Not available'}
                 </Text>
               </View>
             </View>
