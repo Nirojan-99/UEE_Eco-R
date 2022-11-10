@@ -119,7 +119,7 @@ export default function Login() {
               {/* forget password */}
               <TouchableOpacity onPress={resetHandler}>
                 <Text className="text-red-500 font-semibold">
-                  Forget password?
+                  Forgot password?
                 </Text>
               </TouchableOpacity>
             </View>

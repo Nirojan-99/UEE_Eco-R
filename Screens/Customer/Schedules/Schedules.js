@@ -21,7 +21,6 @@ export default function Schedules() {
   const fetchData = async () => {
     try {
       const data = await getUserSchedule('636b9961a8fcf06a3083d62e');
-
       setData(data);
     } catch (error) {}
   };

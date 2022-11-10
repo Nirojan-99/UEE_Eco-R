@@ -1,9 +1,13 @@
-import {View, Text} from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {SafeAreaView} from 'react-native';
 import {FlatList} from 'react-native';
 import VehicleCompany from '../../../Components/VehicleCompany/VehicleCompany';
-import {ArrowLongLeftIcon} from 'react-native-heroicons/solid';
+import {
+  ArrowLongLeftIcon,
+  ArrowLongRightIcon,
+} from 'react-native-heroicons/solid';
+import {useNavigation} from '@react-navigation/native';
 
 export default function Vehicle() {
   const renderItem = () => {
@@ -14,14 +18,24 @@ export default function Vehicle() {
     );
   };
 
-  const data = [1, 2, 3, 4, 5];
+  const navigation = useNavigation();
+
+  const addVehicle = () => {
+    navigation.navigate('ManageVehicle');
+  };
+
+  const data = [1, 2];
   return (
     <SafeAreaView>
       <View className="mt-3">
-        {/* <View className="flex-1 mt-3 bg-slate-400 p-5 flex-row items-center justify-center">
-          <Text>Add Vehicle</Text>
-          <ArrowLongLeftIcon color={'#1C6758'} />
-        </View> */}
+        <TouchableOpacity onPress={addVehicle} className="">
+          <View className="mt-3 mb-3 mx-3 bg-slate-200 rounded-sm p-2 flex-row items-center justify-center space-x-6">
+            <Text className="text-[#1C6758] font-semibold z-20">
+              Add Vehicle
+            </Text>
+            <ArrowLongRightIcon color={'#1C6758'} />
+          </View>
+        </TouchableOpacity>
         {/* TODO */}
         <FlatList
           data={data}

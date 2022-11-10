@@ -3,7 +3,7 @@ import React from 'react';
 import PickupRequest from '../../../Components/PickupRequest_Company/PickupRequest';
 
 export default function Pickup() {
-  const data = [1, 2, 3, 4, 5, 6];
+  const data = [1, 2, 3, 4];
 
   const renderItem = ({item}) => {
     return (
@@ -13,8 +13,9 @@ export default function Pickup() {
     );
   };
   return (
-    <SafeAreaView>
+    <SafeAreaView className="flex-1">
       <FlatList
+        className="flex-1"
         data={data}
         renderItem={renderItem}
         showsHorizontalScrollIndicator={false}
